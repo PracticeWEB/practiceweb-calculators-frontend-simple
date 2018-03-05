@@ -47,7 +47,7 @@ export default {
       // TODO can we avoid force update?
       // http://kong.dev.sift.com:8000/calculator/vat
       let vm = this
-      axios.post('http://api.calculators.dev.sift.com/calculator/propertytaxes', this.input)
+      axios.post('https://api.calculators.dev.sift.com/calculator/propertytaxes', this.input)
         .then((response) => {
           vm.output = response.data
         })

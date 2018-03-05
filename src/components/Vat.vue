@@ -40,7 +40,7 @@ export default {
     submitCalculation (event) {
       // TODO can we avoid force update?
       let vm = this
-      axios.post('http://kong.dev.sift.com:8000/calculator/vat', this.input).then((response) => {
+      axios.post('https://api.calculators.dev.sift.com/calculator/vat', this.input).then((response) => {
         vm.output = response.data
         vm.$forceUpdate()
       })

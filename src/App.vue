@@ -1,43 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-  <!--  <HelloWorld/>-->
-    <!-- <Vat/> -->
-<!-- USING IS TO DEMO ALT STYLE -->
-    <!--<div is="PropertyTaxes"></div> -->
-    <!-- TODO links -->
     <ul>
-    <li>
-       <a href="#" v-on:click="currentView='HelloWorld'">Hello World</a>
-    </li>
-    <li>
-      <a href="#" v-on:click="currentView='Vat'">VAT</a>
-    </li>
-    <li>
-      <a href="#" v-on:click="currentView='PropertyTaxes'">Property Taxes</a>
-    </li>
+      <li><a href="#" @click="calculatorName='PropertyTaxes'">Property</a></li>
+      <li><a href="#" @click="calculatorName='Vat'">VAT</a></li>
     </ul>
-    <div class="view-container" v-bind:is="currentView"></div>
+    <calculator-proxy v-if="calculatorName" :calculator-name="calculatorName"></calculator-proxy>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-import Vat from './components/Vat'
-import PropertyTaxes from './components/PropertyTaxes'
+import CalculatorProxy from './components/CalculatorProxy'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    Vat,
-    PropertyTaxes
+    CalculatorProxy
   },
-  data: () => {
-    return {
-      currentView: 'HelloWorld'
-    }
-  }
+  props: ['calculatorName']
 }
 </script>
 

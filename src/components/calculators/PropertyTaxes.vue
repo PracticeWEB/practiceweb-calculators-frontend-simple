@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="practiceweb-calculator">
         <form @submit.prevent="submitCalculation">
             <fieldset>
                 <legend>Region:</legend>
@@ -29,10 +29,14 @@
 
 <script>
 
-import axios from 'axios'
+import CalculatorAPIMixin from '../../mixins/CalculatorAPI'
 export default {
   name: 'PropertyTaxes',
-  data: () => {
+  mixins: [CalculatorAPIMixin],
+  created: function () {
+    this.servicePath = '/calculator/propertytaxes'
+  },
+  data: function () {
     return {
       input: {
         region: 'england',
@@ -40,18 +44,6 @@ export default {
         propertyValue: '300000'
       },
       output: {}
-    }
-  },
-  methods: {
-    submitCalculation (event) {
-      // TODO can we avoid force update?
-      // http://kong.dev.sift.com:8000/calculator/vat
-      let vm = this
-      axios.post('https://api.calculators.dev.sift.com/calculator/propertytaxes', this.input)
-        .then((response) => {
-          vm.output = response.data
-        })
-      this.$forceUpdate()
     }
   }
 }

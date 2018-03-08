@@ -1,5 +1,5 @@
 <template>
-    <div class="calculator-container">
+    <div class="calculator-container practiceweb-calculator">
     <form @submit.prevent="submitCalculation">
         <label>
             Value
@@ -24,9 +24,13 @@
 
 <script>
 
-import axios from 'axios'
+import CalculatorAPIMixin from '../../mixins/CalculatorAPI'
 export default {
   name: 'Vat',
+  mixins: [CalculatorAPIMixin],
+  created: function () {
+    this.servicePath = '/calculator/vat'
+  },
   data: function () {
     return {
       input: {
@@ -34,28 +38,6 @@ export default {
         value: 0
       },
       output: {}
-    }
-  },
-  methods: {
-    submitCalculation (event) {
-      // TODO can we avoid force update?
-      let vm = this
-      axios.post('https://api.calculators.dev.sift.com/calculator/vat', this.input).then((response) => {
-        vm.output = response.data
-        vm.$forceUpdate()
-      })
-    }
-  },
-  filters: {
-    // TODO move these
-    currency: (value) => {
-      // TODO handle casting.
-      var formatter = new Intl.NumberFormat('en-GB', {
-        style: 'currency',
-        currency: 'GBP',
-        minimumFractionDigits: 0
-      })
-      return formatter.format(value)
     }
   }
 }

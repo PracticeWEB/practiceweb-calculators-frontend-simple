@@ -24,8 +24,8 @@ export default {
         .then((response) => {
           // Update the model with the response data.
           vm.output = response.data
-          // Force udpate is required for the template to update.
-          vm.$forceUpdate()
+          // Ensure that we update.
+          vm.$nextTick()
         })
     }
   }

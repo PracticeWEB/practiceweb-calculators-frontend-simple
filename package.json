@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "wordpress": "NODE_ENV=wordpress node build/build.js"
+    "wordpress": "NODE_ENV=wordpress node build/buildWordpress.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

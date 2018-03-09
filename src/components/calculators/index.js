@@ -6,5 +6,7 @@ import PropertyTaxes from './PropertyTaxes'
 import Vat from './Vat'
 
 export default {
-  FuelCost, PropertyTaxes, Vat
+  FuelCost,
+  PropertyTaxes,
+  Vat
 }

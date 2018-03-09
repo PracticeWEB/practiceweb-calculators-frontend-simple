@@ -1,3 +1,6 @@
+<!--
+Vat calculator component.
+-->
 <template>
     <div class="calculator-container practiceweb-calculator">
     <form @submit.prevent="submitCalculation">

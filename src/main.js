@@ -7,7 +7,9 @@ import CalculatorProxy from './components/CalculatorProxy'
 Vue.config.productionTip = false
 
 // Common filters.
+// Currency filter for £ values.
 Vue.filter('currency', (value) => {
+  // Create formatter object.
   var formatter = new Intl.NumberFormat('en-GB', {
     style: 'currency',
     currency: 'GBP',
@@ -16,21 +18,20 @@ Vue.filter('currency', (value) => {
   return formatter.format(value)
 })
 
-// Build a base template from data attributes.
+// Get all calculators on the page by class.
 let calculators = document.getElementsByClassName('practiceweb-calculator')
 for (let calculator of calculators) {
-  // TODO add an id if one isn't set.
-  console.log(calculator)
+  // Extract the calculator name.
   let calculatorName = calculator.dataset.calculatorname
+  // Service root should be the base path to the API server.
   let serviceRoot = calculator.dataset.serviceroot
-  // let template = domTemplate.toString()
+  // Create the template HTML.
   let template = '<CalculatorProxy calculatorName="' + calculatorName + '" serviceRoot="' + serviceRoot + '"/>'
-  console.log(template)
+  // Create the Vue element.
   /* eslint-disable no-new */
   new Vue({
     el: calculator,
     components: { CalculatorProxy },
     template: template
   })
-  // TODO the above log shows that the collection has been modified. We need to either preserve the coll or
 }

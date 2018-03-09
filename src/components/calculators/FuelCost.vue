@@ -1,3 +1,6 @@
+<!--
+Fuel Cost calculator.
+-->
 <template>
     <div class="practiceweb-calculator">
         <form @submit.prevent="submitCalculation">
@@ -29,6 +32,6 @@ export default {
       },
       output: {}
     }
-  },
+  }
 }
 </script>

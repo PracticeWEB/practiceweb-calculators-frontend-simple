@@ -1,3 +1,7 @@
+<!--
+Property Taxes calculator component.
+Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LBTT).
+-->
 <template>
     <div class="practiceweb-calculator">
         <form @submit.prevent="submitCalculation">

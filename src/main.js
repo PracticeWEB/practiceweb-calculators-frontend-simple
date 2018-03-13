@@ -25,8 +25,9 @@ for (let calculator of calculators) {
   let calculatorName = calculator.dataset.calculatorname
   // Service root should be the base path to the API server.
   let serviceRoot = calculator.dataset.serviceroot
+  let calculatorStyle = calculator.dataset.calculatorstyle
   // Create the template HTML.
-  let template = '<CalculatorProxy calculatorName="' + calculatorName + '" serviceRoot="' + serviceRoot + '"/>'
+  let template = '<CalculatorProxy calculatorName="' + calculatorName + '" serviceRoot="' + serviceRoot + '" calculatorStyle="' + calculatorStyle + '"/>'
   // Create the Vue element.
   /* eslint-disable no-new */
   new Vue({

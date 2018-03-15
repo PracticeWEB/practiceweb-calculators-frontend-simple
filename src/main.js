@@ -1,8 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-// import App from './App'
-import CalculatorProxy from './components/CalculatorProxy'
 
 Vue.config.productionTip = false
 
@@ -19,20 +17,29 @@ Vue.filter('currency', (value) => {
 })
 
 // Get all calculators on the page by class.
-let calculators = document.getElementsByClassName('practiceweb-calculator')
-for (let calculator of calculators) {
-  // Extract the calculator name.
+document.querySelectorAll('.practiceweb-calculator').forEach((calculator) => {
   let calculatorName = calculator.dataset.calculatorname
   // Service root should be the base path to the API server.
   let serviceRoot = calculator.dataset.serviceroot
+  // Extract the style.
   let calculatorStyle = calculator.dataset.calculatorstyle
-  // Create the template HTML.
-  let template = '<CalculatorProxy calculatorName="' + calculatorName + '" serviceRoot="' + serviceRoot + '" calculatorStyle="' + calculatorStyle + '"/>'
-  // Create the Vue element.
+
+  // See if the requested calculatorComponent has been loaded yet.
+  if (!Vue.options.components[calculatorName]) {
+    // This notation returns a promise so we can lazy load the component.
+    Vue.component(calculatorName, () => import(`@/components/calculators/${calculatorName}`))
+  }
+
+  // Create a template that we dynamically load a component from.
+  let template = '<component :is="calculatorName" :serviceRoot="serviceRoot" :calculatorStyle="calculatorStyle"/>'
   /* eslint-disable no-new */
   new Vue({
     el: calculator,
-    components: { CalculatorProxy },
-    template: template
+    template: template,
+    data: {
+      calculatorName: calculatorName,
+      serviceRoot: serviceRoot,
+      calculatorStyle: calculatorStyle
+    }
   })
-}
+})

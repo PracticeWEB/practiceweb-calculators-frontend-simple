@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>calculators-simple</title>
+    <!-- this is just to demo the component style mixin -->
+    <style>
+      .et_btn {
+        color: red
+      }
+      .btn {
+        color: blue
+      }
+    </style>
   </head>
   <body>
   <div>
@@ -11,6 +20,7 @@
   <div class="practiceweb-calculator" data-calculatorName="Vat" data-serviceRoot="https://api.calculators.dev.sift.com"></div>
   <div class="practiceweb-calculator" data-calculatorName="PropertyTaxes" data-serviceRoot="https://api.calculators.dev.sift.com"></div>
   <div class="practiceweb-calculator" data-calculatorName="FuelCost" data-serviceRoot="https://api.calculators.dev.sift.com" data-calculatorStyle="divi"></div>
+  <div class="practiceweb-calculator" data-calculatorName="FuelCost" data-serviceRoot="https://api.calculators.dev.sift.com" data-calculatorStyle="willbedefault"></div>
     <!-- built files will be auto injected -->
   </div>
   </body>

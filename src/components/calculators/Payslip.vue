@@ -7,7 +7,7 @@ Payslip calculator.
             <fieldset>
             <div>
                 <p>
-                <label>Gross Pay: <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" v-model.number="input.grossPay"></label>
+                <label>Gross Pay: <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.grossPay"></label>
                 <span v-show="errors.has('grossPay')"> {{ errors.first('grossPay') }}</span>
                 </p>
             </div>
@@ -54,7 +54,7 @@ Payslip calculator.
             <span>Net Pay: {{ output.netPay | currency }} </span>
             <span>Employers NI: {{ output.employerContribution | currency }} </span>
             <span>Employers Cost: {{ output.employerCost | currency }} </span>
-            <span>Pension contributions: {{ output.employerCost | currency }} </span>
+            <span>Pension contributions: {{ output.pensionContribution | currency }} </span>
         </div>
     </div>
 </template>

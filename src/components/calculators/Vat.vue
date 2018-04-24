@@ -6,7 +6,7 @@ Vat calculator component.
     <form @submit.prevent="submitCalculation">
         <label>
             Value
-            <input type="number" v-model.number="input.value"/>
+            <input type="number" step="0.01" v-model.number="input.value"/>
         </label>
         <label>
             VAT included?

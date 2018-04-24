@@ -4,9 +4,9 @@ Fuel Cost calculator.
 <template>
     <div class="practiceweb-calculator">
         <form @submit.prevent="submitCalculation">
-            <label>Annual Mileage: <input type="number" min="1" v-model.number="input.annualMileage"></label>
+            <label>Annual Mileage: <input type="number" min="1" v-model.number="input.annualMileage" step="0.01"></label>
             <label>Price per Litre: <input type="number" min="1" v-model.number="input.pricePerLitre"></label>
-            <label>Miles per Gallon: <input type="number" min="1" v-model.number="input.milesPerGallon"></label>
+            <label>Miles per Gallon: <input type="number" min="1" v-model.number="input.milesPerGallon" step="0.01"></label>
             <button type="submit" :class="classes.button">Calculate</button>
         </form>
         <div v-if="Object.keys(output).length > 0">

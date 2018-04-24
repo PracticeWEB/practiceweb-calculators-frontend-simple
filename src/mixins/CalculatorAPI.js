@@ -16,17 +16,23 @@ export default {
      *   Event object triggering the submit.
      */
     submitCalculation (event) {
-      // Generate the url. servicePath should be set in the component.
-      let url = this.serviceRoot + this.servicePath
-      let vm = this
-      // Send the post request with Axios.
-      axios.post(url, this.input)
-        .then((response) => {
-          // Update the model with the response data.
-          vm.output = response.data
-          // Ensure that we update.
-          vm.$nextTick()
-        })
+      // Call Vee-validate rules.
+      this.$validator.validateAll().then((result) => {
+        // Result is true is validation passed.
+        if (result) {
+          // Generate the url. servicePath should be set in the component.
+          let url = this.serviceRoot + this.servicePath
+          let vm = this
+          // Send the post request with Axios.
+          axios.post(url, this.input)
+            .then((response) => {
+              // Update the model with the response data.
+              vm.output = response.data
+              // Ensure that we update.
+              vm.$nextTick()
+            })
+        }
+      })
     }
   }
 }

@@ -4,15 +4,46 @@ Payslip calculator.
 <template>
     <div class="practiceweb-calculator">
         <form @submit.prevent="submitCalculation">
-            <label>Gross Pay: <input type="number" min="1" v-model.number="input.grossPay"></label>
+            <fieldset>
+            <div>
+                <p>
+                <label>Gross Pay: <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" v-model.number="input.grossPay"></label>
+                <span v-show="errors.has('grossPay')"> {{ errors.first('grossPay') }}</span>
+                </p>
+            </div>
+            <div>
             <label>Received
-                Annual <input type="radio" v-model="input.period" value="annual"/>
-                Monthly <input type="radio" v-model="input.period" value="month"/>
-                Weekly <input type="radio" v-model="input.period" value="week"/>
+                <label>Annual <input type="radio" v-model="input.period" value="annual"/></label>
+                <label>Monthly <input type="radio" v-model="input.period" value="month"/></label>
+                <label>Weekly <input type="radio" v-model="input.period" value="week"/></label>
             </label>
-            <label>Tax Code: <input type="text" v-model="input.taxCode"></label>
-            <label>Plan1<input type="checkbox" id="plan1" v-model="input.studentLoan.plan1" value="plan1"/></label>
-            <label>Plan2<input type="checkbox" id="plan2" v-model="input.studentLoan.plan2" value="plan2"/></label>
+            </div>
+            </fieldset>
+            <fieldset>
+                <legend> Where do you pay income tax?</legend>
+                <label>England, Wales, Northen Ireland <input type="radio" v-model="input.region" value="england"/></label>
+                <label>Scotland <input type="radio" v-model="input.region" value="scotland"/></label>
+            </fieldset>
+            <fieldset>
+                <legend>Pensions</legend>
+                <label>What percentage of your salary do you pay into a pension?<input type="number" min="0" v-model.number="input.pensionPercentage"></label>
+                <label>Auto-enrolment<input type="radio" v-model="input.pensionType" value="auto"/></label>
+                <label>Employer<input type="radio" v-model="input.pensionType" value="employer"/></label>
+                <label>Salary Sacrifice<input type="radio" v-model="input.pensionType" value="sacrifice"/></label>
+                <label>Personal<input type="radio" v-model="input.pensionType" value="personal"/></label>
+            </fieldset>
+            <fieldset>
+                <legend>Student Loan</legend>
+                <label>Are you repaying a student loan?<input type="checkbox" id="hasLoan" v-model="input.hasStudentLoan"></label>
+                <div v-if="input.hasStudentLoan">
+                    <label>Did you apply for the loan after 1st Sep 2012? <input type="checkbox" v-model="input.studentLoanAfter2012"></label>
+                    <fieldset v-if="input.studentLoanAfter2012">
+                        <legend>Where did you live when you applied for the loan?</legend>
+                        <label>England or Wales<input type="radio" v-model="input.studentLoanLocation" value="england"></label>
+                        <label>Scotland or Northern Ireland<input type="radio" v-model="input.studentLoanLocation" value="scotland"></label>
+                    </fieldset>
+                </div>
+            </fieldset>
             <button type="submit" :class="classes.button">Calculate</button>
         </form>
         <div v-if="Object.keys(output).length > 0">
@@ -23,6 +54,7 @@ Payslip calculator.
             <span>Net Pay: {{ output.netPay | currency }} </span>
             <span>Employers NI: {{ output.employerContribution | currency }} </span>
             <span>Employers Cost: {{ output.employerCost | currency }} </span>
+            <span>Pension contributions: {{ output.employerCost | currency }} </span>
         </div>
     </div>
 </template>
@@ -36,12 +68,31 @@ export default {
   created: function () {
     this.servicePath = '/calculator/payslip'
   },
+  computed: {
+    studentLoanPlan: function () {
+      let loanPlan = 'none'
+      if (this.input.hasStudentLoan) {
+        loanPlan = 'plan1'
+        if (this.input.studentLoanAfter2012 && this.input.studentLoanLocation === 'england') {
+          loanPlan = 'plan2'
+        }
+      }
+      return loanPlan
+    }
+  },
+  watch: {
+    studentLoanPlan: function () {
+      // The watch is used to copy the computed plan value into the input structure.
+      this.input.studentLoanPlan = this.studentLoanPlan
+    }
+  },
   data: () => {
     return {
       input: {
         period: 'month',
-        taxCode: '1185L',
-        studentLoan: {}
+        pensionPercentage: 0,
+        pensionType: 'auto',
+        studentLoanLocation: 'england'
       },
       output: {}
     }

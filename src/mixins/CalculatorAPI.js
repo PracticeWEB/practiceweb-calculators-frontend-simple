@@ -31,6 +31,13 @@ export default {
               // Ensure that we update.
               vm.$nextTick()
             })
+            .catch((error) => {
+              // TODO catch error
+              // TODO parse repsonse
+              // TODO update object
+              vm.error = error
+              vm.$nextTick()
+            })
         }
       })
     }

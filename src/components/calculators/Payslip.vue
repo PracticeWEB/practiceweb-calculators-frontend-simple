@@ -31,6 +31,9 @@ Payslip calculator.
                 <label>Employer<input type="radio" v-model="input.pensionType" value="employer"/></label>
                 <label>Salary Sacrifice<input type="radio" v-model="input.pensionType" value="sacrifice"/></label>
                 <label>Personal<input type="radio" v-model="input.pensionType" value="personal"/></label>
+                <div v-if="input.pensionType === 'sacrifice'">
+                    <label>Has the sacrifice been applied above?<input type="checkbox" v-model="input.salarySacrificeApplied"></label>
+                </div>
             </fieldset>
             <fieldset>
                 <legend>Student Loan</legend>
@@ -46,16 +49,16 @@ Payslip calculator.
             </fieldset>
             <button type="submit" :class="classes.button">Calculate</button>
         </form>
-        <div v-if="Object.keys(output).length > 0">
-            <span>Gross Pay: {{ output.grossPay | currency }} </span>
-            <span>PAYE Deduction: {{ output.payeDeduction | currency }} </span>
-            <span>NI Deduction: {{ output.niDeduction | currency }} </span>
-            <span>Student Loan Deduction: {{ output.studentLoanDeduction | currency }} </span>
-            <span>Net Pay: {{ output.netPay | currency }} </span>
-            <span>Employers NI: {{ output.employerContribution | currency }} </span>
-            <span>Employers Cost: {{ output.employerCost | currency }} </span>
-            <span>Pension contributions: {{ output.pensionContribution | currency }} </span>
-        </div>
+        <dl v-if="Object.keys(output).length > 0">
+            <dt>Gross Pay:</dt><dd>{{ output.grossPay | currency }} </dd>
+            <dt>PAYE Deduction:</dt><dd>{{ output.payeDeduction | currency }}</dd>
+            <dt>NI Deduction:</dt><dd>{{ output.niDeduction | currency }} </dd>
+            <dt>Student Loan Deduction:</dt><dd>{{ output.studentLoanDeduction | currency }} </dd>
+            <dt>Net Pay:</dt><dd>{{ output.netPay | currency }} </dd>
+            <dt>Employers NI:</dt><dd>{{ output.employerContribution | currency }} </dd>
+            <dt>Employers Cost:</dt><dd>{{ output.employerCost | currency }} </dd>
+            <dt>Pension contributions:</dt><dd>{{ output.pensionContribution | currency }}</dd>
+        </dl>
     </div>
 </template>
 
@@ -82,7 +85,7 @@ export default {
   },
   watch: {
     studentLoanPlan: function () {
-      // The watch is used to copy the computed plan value into the input structure.
+      // Because computed properties can't nest, the watch is used to copy the computed plan value into the input structure.
       this.input.studentLoanPlan = this.studentLoanPlan
     }
   },

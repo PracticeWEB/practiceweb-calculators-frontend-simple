@@ -30,7 +30,7 @@ document.querySelectorAll('.practiceweb-calculator').forEach((calculator) => {
   // See if the requested calculatorComponent has been loaded yet.
   if (!Vue.options.components[calculatorName]) {
     // This notation returns a promise so we can lazy load the component.
-    Vue.component(calculatorName, () => import(`@/components/calculators/${calculatorName}`))
+    Vue.component(calculatorName, () => import(/* webpackChunkName: "[request]" */ `@/components/calculators/${calculatorName}`))
   }
 
   // Create a template that we dynamically load a component from.

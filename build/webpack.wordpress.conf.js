@@ -25,7 +25,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: path.posix.join('assets','js/[name].js'),
-    chunkFilename: path.posix.join('assets','js/[id].[chunkhash].js'),
+    chunkFilename: path.posix.join('assets','js/[name].[chunkhash].js'),
     publicPath: '/wp-content/plugins/practiceweb-calculators/'
   },
   plugins: [

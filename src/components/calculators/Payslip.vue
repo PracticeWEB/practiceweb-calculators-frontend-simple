@@ -95,7 +95,8 @@ export default {
         period: 'month',
         pensionPercentage: 0,
         pensionType: 'auto',
-        studentLoanLocation: 'england'
+        studentLoanLocation: 'england',
+        location: 'england'
       },
       output: {}
     }

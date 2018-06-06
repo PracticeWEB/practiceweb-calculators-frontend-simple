@@ -45,20 +45,26 @@ Payslip calculator.
                         <label>England or Wales<input type="radio" v-model="input.studentLoanLocation" value="england"></label>
                         <label>Scotland or Northern Ireland<input type="radio" v-model="input.studentLoanLocation" value="scotland"></label>
                     </fieldset>
+                    <span>You will be covered under {{ studentLoanPlan }}</span>
                 </div>
             </fieldset>
             <button type="submit" :class="classes.button">Calculate</button>
         </form>
-        <dl v-if="Object.keys(output).length > 0">
-            <dt>Gross Pay:</dt><dd>{{ output.grossPay | currency }} </dd>
-            <dt>PAYE Deduction:</dt><dd>{{ output.payeDeduction | currency }}</dd>
-            <dt>NI Deduction:</dt><dd>{{ output.niDeduction | currency }} </dd>
-            <dt>Student Loan Deduction:</dt><dd>{{ output.studentLoanDeduction | currency }} </dd>
-            <dt>Net Pay:</dt><dd>{{ output.netPay | currency }} </dd>
-            <dt>Employers NI:</dt><dd>{{ output.employerContribution | currency }} </dd>
-            <dt>Employers Cost:</dt><dd>{{ output.employerCost | currency }} </dd>
-            <dt>Pension contributions:</dt><dd>{{ output.pensionContribution | currency }}</dd>
-        </dl>
+        <div v-if="Object.keys(output).length > 0">
+            <div v-for="(resultSet, period) in output" :key="period">
+                <span>{{ period }}</span>
+                <dl v-if="Object.keys(output).length > 0">
+                    <dt>Gross Pay:</dt><dd>{{ resultSet.grossPay | currency }} </dd>
+                    <dt>PAYE Deduction:</dt><dd>{{ resultSet.payeDeduction | currency }}</dd>
+                    <dt>NI Deduction:</dt><dd>{{ resultSet.niDeduction | currency }} </dd>
+                    <dt>Student Loan Deduction:</dt><dd>{{ resultSet.studentLoanDeduction | currency }} </dd>
+                    <dt>Net Pay:</dt><dd>{{ resultSet.netPay | currency }} </dd>
+                    <dt>Employers NI:</dt><dd>{{ resultSet.employerContribution | currency }} </dd>
+                    <dt>Employers Cost:</dt><dd>{{ resultSet.employerCost | currency }} </dd>
+                    <dt>Pension contributions:</dt><dd>{{ resultSet.pensionContribution | currency }}</dd>
+                </dl>
+            </div>
+        </div>
     </div>
 </template>
 

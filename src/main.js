@@ -1,8 +1,10 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import Tabs from 'vue-tabs-component'
 import VeeValidate from 'vee-validate'
 
+Vue.use(Tabs)
 Vue.use(VeeValidate)
 
 Vue.config.productionTip = false

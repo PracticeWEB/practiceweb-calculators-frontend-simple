@@ -218,7 +218,6 @@ export default {
     // Start of header styles.
 
     .practiceweb-calculator {
-        width: 90%;
         margin: auto;
         color: #333333;
     }
@@ -351,6 +350,11 @@ export default {
     }
 
     .output {
+        .tabs-component {
+          .tabs-component-tabs {
+            padding: 0;
+          }
+        }
         .output-description {
             padding: 1em 0;
             text-align: center;
@@ -456,7 +460,7 @@ export default {
             .form-group--twos {
                 width: 80%;
                 .radio-spacing {
-                    width: 42%;
+                    width: 47%;
                     margin: 0 10px 10px 0;
                 }
             }
@@ -497,6 +501,7 @@ export default {
             display: flex;
             justify-content: flex-start;
             margin-bottom: -1px;
+            padding: 0;
         }
 
         .tabs-component-tab.is-active {

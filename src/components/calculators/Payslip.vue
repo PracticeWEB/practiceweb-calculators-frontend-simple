@@ -12,16 +12,26 @@ Payslip calculator.
                 <div class="form-group form-group--gross flex-wrap">
                     <span class="input-field--specialCharacter input-field--specialCharacter--pound">&#163;</span>
                     <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.grossPay" class="input-field input-field--number border-left" placeholder="Enter your gross pay here"/>
-                    <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Annual'}"><input type="radio" v-model="input.period" value="Annual" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Annual</label>
-                    <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Monthly'}"><input type="radio" v-model="input.period" value="Monthly" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Monthly</label>
-                    <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Weekly'}"><input type="radio" v-model="input.period" value="Weekly" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Weekly</label>
+                    <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Annual'}">
+                      <input type="radio" v-model="input.period" value="Annual" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Annual
+                    </label>
+                    <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Monthly'}">
+                      <input type="radio" v-model="input.period" value="Monthly" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Monthly
+                    </label>
+                    <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Weekly'}">
+                      <input type="radio" v-model="input.period" value="Weekly" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Weekly
+                    </label>
                 </div>
             </fieldset>
             <fieldset class="input-fields">
                 <p class="input-fields__title">Where do you pay income Tax? *</p>
                 <div class="form-group form-group--mobile flex-wrap">
-                    <label class="input-field--label radio-spacing"  :class="{active: input.region === 'england'}"><input type="radio" v-model="input.region" value="england" class="input-field input-field--radio" :checked="checked"/>England, Wales, Nothern island</label>
-                    <label class="input-field--label radio-spacing"  :class="{active: input.region === 'scotland'}"><input type="radio" v-model="input.region" value="scotland" class="input-field input-field--radio" :checked="checked"/>Scotland</label>
+                    <label class="input-field--label radio-spacing"  :class="{active: input.region === 'england'}">
+                      <input type="radio" v-model="input.region" value="england" class="input-field input-field--radio" :checked="checked"/>England, Wales, Nothern island
+                    </label>
+                    <label class="input-field--label radio-spacing"  :class="{active: input.region === 'scotland'}">
+                      <input type="radio" v-model="input.region" value="scotland" class="input-field input-field--radio" :checked="checked"/>Scotland
+                    </label>
                 </div>
             </fieldset>
             <fieldset class="input-fields">
@@ -36,10 +46,18 @@ Payslip calculator.
             <fieldset class="input-fields">
                 <p class="input-fields__title">Pension scheme</p>
                 <div class="form-group form-group--twos">
-                    <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'auto'}"><input type="radio" v-model="input.pensionType" value="auto" class="input-field input-field--radio" :checked="checked"/>Auto-enrolment</label>
-                    <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'employer'}"><input type="radio" v-model="input.pensionType" value="employer" class="input-field input-field--radio" :checked="checked"/>Employer</label>
-                    <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'sacrifice'}"><input type="radio" v-model="input.pensionType" value="sacrifice" class="input-field input-field--radio" :checked="checked"/>Salary sacrifice</label>
-                    <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'personal'}"><input type="radio" v-model="input.pensionType" value="personal" class="input-field input-field--radio" :checked="checked"/>Personal</label>
+                    <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'auto'}">
+                      <input type="radio" v-model="input.pensionType" value="auto" class="input-field input-field--radio" :checked="checked"/>Auto-enrolment
+                    </label>
+                    <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'employer'}">
+                      <input type="radio" v-model="input.pensionType" value="employer" class="input-field input-field--radio" :checked="checked"/>Employer
+                    </label>
+                    <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'sacrifice'}">
+                      <input type="radio" v-model="input.pensionType" value="sacrifice" class="input-field input-field--radio" :checked="checked"/>Salary sacrifice
+                    </label>
+                    <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'personal'}">
+                      <input type="radio" v-model="input.pensionType" value="personal" class="input-field input-field--radio" :checked="checked"/>Personal
+                    </label>
                 </div>
                 <div v-if="input.pensionType === 'sacrifice'">
                     <p>Has the sacrifice been applied above?<input type="checkbox" v-model="input.salarySacrificeApplied"></p>
@@ -48,8 +66,12 @@ Payslip calculator.
             <fieldset class="input-fields">
               <p class="input-fields__title">Include student Loan?</p>
               <div class="form-group form-group--loan-twos form-group--mobile">
-                <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'before'}"><input type="radio" v-model="input.studentLoan2012" value="before" class="input-field input-field--radio" :checked="checked"/>Before 1st Sept 2012</label>
-                <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'after'}"><input type="radio" v-model="input.studentLoan2012" value="after" class="input-field input-field--radio" :checked="checked"/>After 1st Sept 2012</label>
+                <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'before'}">
+                  <input type="radio" v-model="input.studentLoan2012" value="before" class="input-field input-field--radio" :checked="checked"/>Before 1st Sept 2012
+                </label>
+                <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'after'}">
+                  <input type="radio" v-model="input.studentLoan2012" value="after" class="input-field input-field--radio" :checked="checked"/>After 1st Sept 2012
+                </label>
               </div>
               <div v-if="input.studentLoan2012 === 'after'">
                 <fieldset v-if="input.studentLoan2012 === 'after'">
@@ -90,7 +112,6 @@ Payslip calculator.
                   </div>
                   <p class="values-header">Breakdown</p>
                   <div class="sub-values">
-                    <!--<dt>Gross Pay:</dt><dd>{{ resultSet.grossPay | currency }} </dd>-->
                     <dt class="value-items value-label">PAYE Deduction:</dt><dd class="value-items value-number">{{ output.month.payeDeduction | currency }}</dd>
                     <dt class="value-items value-label">NI Deduction:</dt><dd class="value-items value-number">{{ output.month.niDeduction | currency }} </dd>
                     <dt class="value-items value-label">Student Loan Deduction:</dt><dd class="value-items value-number">{{ output.month.studentLoanDeduction | currency }} </dd>
@@ -107,7 +128,6 @@ Payslip calculator.
                   </div>
                   <p class="values-header">Breakdown</p>
                   <div class="sub-values">
-                    <!--<dt>Gross Pay:</dt><dd>{{ resultSet.grossPay | currency }} </dd>-->
                     <dt class="value-items value-label">PAYE Deduction:</dt><dd class="value-items value-number">{{ output.week.payeDeduction | currency }}</dd>
                     <dt class="value-items value-label">NI Deduction:</dt><dd class="value-items value-number">{{ output.week.niDeduction | currency }} </dd>
                     <dt class="value-items value-label">Student Loan Deduction:</dt><dd class="value-items value-number">{{ output.week.studentLoanDeduction | currency }} </dd>
@@ -200,13 +220,17 @@ export default {
 
     // Start of Global styles.
 
+    fieldset {
+      border: 0;
+    }
+
     .inline {
         display: inline-block;
     }
 
     .radio-spacing{
         margin-right: 0;
-        border-radius: 0.2rem;
+        border-radius: 4px;
     }
 
     button {
@@ -277,7 +301,7 @@ export default {
                 width: calc(100% - 30px);
             }
            .input-field--specialCharacter {
-               padding: 0.36rem;
+               padding: 10px 5px;
                border: 1px solid #dce6eb;
                width: 1.875rem;
                text-align: center;
@@ -330,7 +354,7 @@ export default {
         font-weight: 600;
         margin-right: 0;
         list-style: none;
-        width: 33.3%;
+        width: 33.3333%;
         display: inline-block;
         border: solid 1px #ddd;
     }

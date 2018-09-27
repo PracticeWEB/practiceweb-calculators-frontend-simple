@@ -52,12 +52,25 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
           </fieldset>
           <button type="submit" :class="classes.button">Calculate</button>
         </form>
-        <div v-if="Object.keys(output).length > 0">
-            <ul>
-                <li><span> {{ dutyName }} : {{ output.duty | currency }}</span></li>
-                <li v-if="output.secondHomeDuty"><span>Second Home Duty: {{ output.secondHomeDuty | currency }}</span></li>
-            </ul>
+        <div class="output" v-if="Object.keys(output).length > 0">
+          <div class="output-list inline">
+            <p class="output-list--header">Breakdown</p>
+            <div class="property-output">
+              <p class="value-label inline">{{ dutyName }}:</p>
+              <p class="value-items inline">{{ output.duty | currency }}</p>
+            </div>
+            <div class="property-output" v-if="output.secondHomeDuty">
+              <p class="value-label inline">Second Home Duty:</p>
+              <p class="value-items inline">{{ output.secondHomeDuty | currency }}</p>
+            </div>
+          </div>
         </div>
+        <!--<div v-if="Object.keys(output).length > 0">-->
+            <!--<ul>-->
+                <!--<li><span> {{ dutyName }} : {{ output.duty | currency }}</span></li>-->
+                <!--<li v-if="output.secondHomeDuty"><span>Second Home Duty: {{ output.secondHomeDuty | currency }}</span></li>-->
+            <!--</ul>-->
+        <!--</div>-->
     </div>
 </template>
 

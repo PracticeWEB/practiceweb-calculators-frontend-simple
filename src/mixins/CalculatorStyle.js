@@ -13,7 +13,7 @@ export default {
           button: 'btn'
         },
         divi: {
-          button: 'et_btn'
+          button: 'et_pb_button'
         }
       }
       if (classMap.hasOwnProperty(this.calculatorStyle)) {

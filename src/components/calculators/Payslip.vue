@@ -256,8 +256,8 @@ Payslip calculator.
     }
   }
   /*.content-container {*/
-    /*width: 100%;*/
-    /*max-width: 100%;*/
+  /*width: 100%;*/
+  /*max-width: 100%;*/
   /*}*/
   .input-fields__title {
     font-weight: bold;
@@ -448,6 +448,13 @@ Payslip calculator.
       padding: 2rem;
       .calculate-button {
         margin-bottom: 1rem;
+      }
+      .output {
+        .output-list {
+          .value-number {
+            text-align: left;
+          }
+        }
       }
     }
     .input-fields {

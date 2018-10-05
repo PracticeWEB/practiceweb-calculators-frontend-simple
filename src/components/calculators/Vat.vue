@@ -70,3 +70,7 @@ Vat calculator component.
     }
   }
 </script>
+
+<style lang="scss">
+  @import "../../scss/globals.scss";
+</style>

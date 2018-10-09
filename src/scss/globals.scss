@@ -54,10 +54,6 @@ dl {
     }
   }
 }
-/*.content-container {*/
-/*width: 100%;*/
-/*max-width: 100%;*/
-/*}*/
 .input-fields__title {
   font-weight: bold;
 }
@@ -244,7 +240,6 @@ dl {
   // End of Global responsive styles.
   // Start of Input responsive styles.
   .content-container {
-    padding: 2rem;
     .calculate-button {
       margin-bottom: 1rem;
     }
@@ -296,13 +291,13 @@ dl {
     }
   }
   .input--width {
-    width: 50%;
+    width: 51%;
     display: inline-block;
   }
   // End of Input responsive styles.
   // Start of Output responsive styles.
   .output--width {
-    width: 50%;
+    width: 49%;
     display: inline-block;
     float: right;
   }

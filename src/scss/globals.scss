@@ -223,6 +223,7 @@ dl {
     margin:0;
     padding-bottom: 0.5em;
     font-weight: bold;
+    text-align: right;
   }
 }
 // End of Output styles.
@@ -246,6 +247,9 @@ dl {
     .output {
       .output-list {
         .value-number {
+          text-align: left;
+        }
+        .value-items {
           text-align: left;
         }
       }

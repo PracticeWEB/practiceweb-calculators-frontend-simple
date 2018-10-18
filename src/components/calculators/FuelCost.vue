@@ -26,10 +26,6 @@ Fuel Cost calculator.
               <input type="number" min="1" v-model.number="input.milesPerGallon" step="0.01" class="input-field input-field--number">
             </div>
           </fieldset>
-          <!---->
-            <!--<label>Annual Mileage: <input type="number" min="1" v-model.number="input.annualMileage" step="0.01"></label>-->
-            <!--<label>Price per Litre: <input type="number" min="1" v-model.number="input.pricePerLitre"></label>-->
-            <!--<label>Miles per Gallon: <input type="number" min="1" v-model.number="input.milesPerGallon" step="0.01"></label>-->
             <button type="submit" class="calculate-button" :class="classes.button">Calculate</button>
         </form>
         <br>
@@ -40,8 +36,6 @@ Fuel Cost calculator.
               <dd class="value-items inline">{{ output.fuelCost | currency }}</dd>
             </div>
           </div>
-        <!--<div v-if="Object.keys(output).length > 0">-->
-            <!--<span>Fuel Cost: {{ output.fuelCost | currency }} </span>-->
         </div>
       </div>
     </div>

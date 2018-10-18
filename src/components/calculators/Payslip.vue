@@ -27,7 +27,7 @@ Payslip calculator.
         <p class="input-fields__title">Where do you pay income Tax? *</p>
         <div class="form-group form-group--mobile flex-wrap">
           <label class="input-field--label radio-spacing"  :class="{active: input.region === 'england'}">
-            <input type="radio" v-model="input.region" value="england" class="input-field input-field--radio" :checked="checked"/>England, Wales, Nothern Ireland
+            <input type="radio" v-model="input.region" value="england" class="input-field input-field--radio" :checked="checked"/>England, Wales, Northern Ireland
           </label>
           <label class="input-field--label radio-spacing"  :class="{active: input.region === 'scotland'}">
             <input type="radio" v-model="input.region" value="scotland" class="input-field input-field--radio" :checked="checked"/>Scotland

@@ -64,24 +64,35 @@ Payslip calculator.
         </div>
       </fieldset>
       <fieldset class="input-fields">
-        <p class="input-fields__title">Include student Loan?</p>
+        <p class="input-fields__title">Student Loan?</p>
         <div class="form-group form-group--loan-twos form-group--mobile">
-          <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'before'}">
-            <input type="radio" v-model="input.studentLoan2012" value="before" class="input-field input-field--radio" :checked="checked"/>Before 1st Sept 2012
-          </label>
-          <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'after'}">
-            <input type="radio" v-model="input.studentLoan2012" value="after" class="input-field input-field--radio" :checked="checked"/>After 1st Sept 2012
-          </label>
-        </div>
-        <div v-if="input.studentLoan2012 === 'after'">
-          <fieldset v-if="input.studentLoan2012 === 'after'">
-            <p>Where did you live when you applied for the loan?</p>
-            <p>England or Wales<input type="radio" v-model="input.studentLoanLocation" value="england"></p>
-            <p>Scotland or Northern Ireland<input type="radio" v-model="input.studentLoanLocation" value="scotland"></p>
+          <fieldset class="input-fields">
+            <label class="input-field--label radio-spacing"  :class="{active: input.hasStudentLoan === true}">
+              <input type="checkbox" v-model="input.hasStudentLoan" class="input-field input-field--radio" :checked="checked"/>Are you repaying a student loan?
+            </label>
+          </fieldset>
+          <fieldset class="input-fields" v-if="input.hasStudentLoan">
+            <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'before'}">
+              <input type="radio" v-model="input.studentLoan2012" value="before" class="input-field input-field--radio" :checked="checked"/>Before 1st Sept 2012
+            </label>
+            <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'after'}">
+              <input type="radio" v-model="input.studentLoan2012" value="after" class="input-field input-field--radio" :checked="checked"/>After 1st Sept 2012
+            </label>
+          </fieldset>
+          <fieldset class="input-fields" v-if="input.studentLoan2012 === 'after'">
+            <p class="input-fields__title">Where did you live when you applied for the loan?</p>
+            <label class="input-field--label radio-spacing"  :class="{active: input.studentLoanLocation === 'england'}">
+              <input type="radio" v-model="input.studentLoanLocation" value="england" class="input-field input-field--radio" :checked="checked"/>England or Wales
+            </label>
+            <label class="input-field--label radio-spacing"  :class="{active: input.studentLoanLocation === 'scotland'}">
+              <input type="radio" v-model="input.studentLoanLocation" value="scotland" class="input-field input-field--radio" :checked="checked"/>Scotland or Northern Ireland
+            </label>
             <p>You will be covered under {{ studentLoanPlan }}</p>
           </fieldset>
         </div>
+        <!--</fieldset>-->
       </fieldset>
+      <!--</fieldset>-->
       <button type="submit" class="calculate-button" :class="classes.button" @click="setResult">Calculate</button>
     </form>
     <div class="output output--width" v-if="Object.keys(output).length > 0">
@@ -92,7 +103,8 @@ Payslip calculator.
         <tab :key="'annual'" :name="tabNames.annual">
           <dl>
             <div class="main-value">
-              <dt class="value-items value-title">Net Pay:</dt><dd class="value-items value-number">{{ output.annual.netPay | currency }} </dd>
+              <dt class="value-items value-title">Net Pay:</dt>
+              <dd class="value-items value-number">{{ output.annual.netPay | currency }} </dd>
             </div>
             <p class="values-header">Breakdown</p>
             <div class="sub-values">
@@ -159,10 +171,10 @@ Payslip calculator.
     computed: {
       studentLoanPlan: function () {
         let loanPlan = 'none'
-        if (this.input.studentLoan2012) {
-          loanPlan = 'plan 1'
-          if (this.input.studentLoan2012 && this.input.studentLoanLocation === 'england') {
-            loanPlan = 'plan 2'
+        if (this.input.hasStudentLoan) {
+          loanPlan = 'plan1'
+          if (this.input.studentLoan2012 === 'after' && this.input.studentLoanLocation === 'england') {
+            loanPlan = 'plan2'
           }
         }
         return loanPlan
@@ -177,11 +189,12 @@ Payslip calculator.
     data: () => {
       return {
         input: {
-          period: 'month',
+          period: 'Annual',
           pensionPercentage: 0,
           pensionType: 'auto',
           studentLoanLocation: 'england',
-          region: 'england'
+          region: 'england',
+          studentLoan2012: 'before'
         },
         output: {},
         payslipResult: false,

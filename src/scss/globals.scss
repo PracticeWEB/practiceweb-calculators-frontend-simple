@@ -32,6 +32,9 @@ button {
 dl {
   margin: 0;
 }
+label {
+  cursor: pointer;
+}
 // End of Global styles.
 // Start of header styles.
 .practiceweb-calculator {
@@ -124,6 +127,13 @@ dl {
   .form-group--loan-twos {
     width: 100%;
     flex-wrap: wrap;
+    .input-fields {
+      width: 100%;
+      .input-field--label {
+        width:auto;
+        display: block;
+      }
+    }
   }
 }
 // End of Input styles.
@@ -291,7 +301,12 @@ dl {
       }
     }
     .form-group--loan-twos {
-      width: 90%;
+      .input-fields {
+        width: 90%;
+        .input-field--label {
+          display: inline-block;
+        }
+      }
     }
   }
   .input--width {

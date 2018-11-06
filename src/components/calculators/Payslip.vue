@@ -95,7 +95,7 @@ Payslip calculator.
       <!--</fieldset>-->
       <button type="submit" class="pw-calc-button" :class="classes.button" @click="setResult">Calculate</button>
     </form>
-    <div class="pw-calc-output pw-calc-output__width" v-if="Object.keys(output).length > 0">
+    <div class="pw-calc-output pw-calc-output__width pw-calc-output--tabs" v-if="Object.keys(output).length > 0">
       <template v-if="payslipResult">
         <p class="pw-calc-output__description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
       </template>

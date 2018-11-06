@@ -171,7 +171,7 @@ dl {
       padding: 0;
     }
     .pw-calc-output__wrapper {
-      padding: 2em 3em;
+      padding: 2em 1em;
     }
   }
   .pw-calc-output__description {
@@ -189,6 +189,7 @@ dl {
     }
     .pw-calc-output__item--value {
       font-size: 2em;
+      margin: 0;
     }
   }
   .pw-calc-output__values-header {
@@ -241,12 +242,11 @@ dl {
 
 
   // Start of Input responsive styles.
-  .content-container {
-    .pw-calc-button {
-      margin-bottom: 1rem;
-      width: auto;
-    }
+  .pw-calc-button {
+    margin-bottom: 1rem;
+    width: auto;
   }
+
   .form-item {
     .form-item__wrapper {
       display: flex;
@@ -290,6 +290,7 @@ dl {
         width: 90%;
         .form-item__label {
           display: inline-block;
+          margin: 0 10px 10px 0;
         }
       }
     }
@@ -340,6 +341,18 @@ dl {
   }
 
   .pw-calc-output {
+    .tabs-component {
+      .tabs-component-tabs {
+        padding: 0;
+      }
+      .pw-calc-output__wrapper {
+        padding: 2em 1em;
+      }
+    }
+  }
+
+
+  .pw-calc-output {
     .pw-calc-output__wrapper {
       .pw-calc-output__item--value {
         text-align: left;
@@ -347,10 +360,11 @@ dl {
     }
   }
 
-  .pw-calc-output {
-    .tabs-component {
-      .pw-calc-output__wrapper {
-        .pw-calc-output__item.pw-calc-output__item--value {
+  .pw-calc-output--tabs {
+    .pw-calc-output__wrapper {
+      padding: 2em 3em;
+      .pw-calc-output__item {
+        &.pw-calc-output__item--value {
           text-align: right;
         }
       }

@@ -5,13 +5,9 @@ Vat calculator component.
   <div class="calculator-container pw-calc">
     <div class="content-container">
       <form class="input" @submit.prevent="submitCalculation">
-
-
         <div class="pw-calc-header">
           <h3 class="pw-calc-header__title">VAT Calculator</h3>
         </div>
-
-
         <fieldset class="form-item">
           <p class="form-item__title">Value *</p>
           <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
@@ -19,8 +15,6 @@ Vat calculator component.
             <input class="form-item__input form-item__input--number" border-left type='number' step="0.01" v-model.number="input.value" placeholder="Enter your value here"/>
           </div>
         </fieldset>
-
-
         <fieldset class="form-item">
           <p class="form-item__title">VAT included? *</p>
           <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
@@ -32,15 +26,9 @@ Vat calculator component.
             </label>
           </div>
         </fieldset>
-
-
         <button type="submit" class="pw-calc-button" :class="classes.button">Calculate</button>
-
-
       </form>
       <br>
-
-
       <div class="pw-calc-output" v-if="Object.keys(output).length > 0">
         <div class="pw-calc-output__wrapper flex flex-wrap">
           <dt class="pw-calc-output__item pw-calc-output__item--label">Net:</dt>
@@ -53,8 +41,6 @@ Vat calculator component.
       </div>
     </div>
   </div>
-
-
 </template>
 
 <script>

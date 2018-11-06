@@ -5,13 +5,9 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
 <template>
     <div class="practiceweb-calculator">
         <div class="content-container">
-
-
           <div class="pw-calc-header">
             <h3 class="pw-calc-header__title">{{ dutyName }}</h3>
           </div>
-
-
           <form class="input" @submit.prevent="submitCalculation">
             <fieldset class="form-item">
               <p class="form-item__title">Region:</p>
@@ -27,8 +23,6 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
                 </label>
               </div>
             </fieldset>
-
-
             <fieldset class="form-item">
               <p class="form-item__title">Type of property:</p>
               <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
@@ -40,8 +34,6 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
                 </label>
               </div>
             </fieldset>
-
-
             <fieldset class="form-item">
               <p class="form-item__title">Are you a first time buyer?</p>
               <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
@@ -53,21 +45,15 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
                 </label>
               </div>
             </fieldset>
-
-
             <fieldset class="form-item">
               <p class="form-item__title">Property Value</p>
               <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
                 <input name="propertyValue" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.propertyValue" class="form-item__input form-item__input--number" placeholder="Enter your property value here"/>
               </div>
             </fieldset>
-
-
             <button type="submit" class="pw-calc-button" :class="classes.button">Calculate</button>
           </form>
           <br>
-
-
           <div class="pw-calc-output" v-if="Object.keys(output).length > 0">
             <div class="pw-calc-output__wrapper flex flex-wrap">
               <dt class="pw-calc-output__item pw-calc-output__item--label inline">{{ dutyName }}:</dt>
@@ -78,8 +64,6 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
           </div>
         </div>
     </div>
-
-
 </template>
 
 <script>

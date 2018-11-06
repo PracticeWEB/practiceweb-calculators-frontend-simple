@@ -3,13 +3,9 @@ Payslip calculator.
 -->
 <template xmlns="http://www.w3.org/1999/html">
   <div class="practiceweb-calculator">
-
-
     <div class="pw-calc-header">
       <h3 class="pw-calc-header__title">Payslip Calculator</h3>
     </div>
-
-
     <form class="input input--width" @submit.prevent="submitCalculation">
       <fieldset class="form-item">
         <p class="form-item__title">Gross Pay *</p>
@@ -27,8 +23,6 @@ Payslip calculator.
           </label>
         </div>
       </fieldset>
-
-
       <fieldset class="form-item">
         <p class="form-item__title">Where do you pay income Tax? *</p>
         <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
@@ -40,8 +34,6 @@ Payslip calculator.
           </label>
         </div>
       </fieldset>
-
-
       <fieldset class="form-item">
         <p class="form-item__title">Percentage of salary paid into pension</p>
         <div class="form-item__wrapper">
@@ -51,8 +43,6 @@ Payslip calculator.
           </div>
         </div>
       </fieldset>
-
-
       <fieldset class="form-item">
         <p class="form-item__title">Pension scheme</p>
         <div class="form-item__wrapper form-item__wrapper--two">
@@ -73,8 +63,6 @@ Payslip calculator.
           <p>Has the sacrifice been applied above?<input type="checkbox" v-model="input.salarySacrificeApplied"></p>
         </div>
       </fieldset>
-
-
       <fieldset class="form-item">
         <p class="form-item__title">Student Loan?</p>
         <div class="form-item__wrapper form-item__wrapper--loan--two form-item__wrapper--mobile">
@@ -83,8 +71,6 @@ Payslip calculator.
               <input type="checkbox" v-model="input.hasStudentLoan" class="form-item__input form-item__input--radio" :checked="checked"/>Are you repaying a student loan?
             </label>
           </fieldset>
-
-
           <fieldset class="form-item" v-if="input.hasStudentLoan">
             <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoan2012 === 'before'}">
               <input type="radio" v-model="input.studentLoan2012" value="before" class="form-item__input form-item__input--radio" :checked="checked"/>Before 1st Sept 2012
@@ -93,8 +79,6 @@ Payslip calculator.
               <input type="radio" v-model="input.studentLoan2012" value="after" class="form-item__input form-item__input--radio" :checked="checked"/>After 1st Sept 2012
             </label>
           </fieldset>
-
-
           <fieldset class="form-item" v-if="input.studentLoan2012 === 'after'">
             <p class="form-item__title">Where did you live when you applied for the loan?</p>
             <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoanLocation === 'england'}">
@@ -109,18 +93,12 @@ Payslip calculator.
         <!--</fieldset>-->
       </fieldset>
       <!--</fieldset>-->
-
-
       <button type="submit" class="pw-calc-button" :class="classes.button" @click="setResult">Calculate</button>
     </form>
-
-
     <div class="pw-calc-output pw-calc-output__width" v-if="Object.keys(output).length > 0">
       <template v-if="payslipResult">
         <p class="pw-calc-output__description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
       </template>
-
-
       <tabs>
         <tab :key="'annual'" :name="tabNames.annual">
           <dl>
@@ -139,8 +117,6 @@ Payslip calculator.
             </div>
           </dl>
         </tab>
-
-
         <tab :key="'month'" :name="tabNames.month">
           <dl>
             <div class="pw-calc-output__main">
@@ -158,8 +134,6 @@ Payslip calculator.
             </div>
           </dl>
         </tab>
-
-
         <tab :key="'week'" :name="tabNames.week">
           <dl>
             <div class="pw-calc-output__main">

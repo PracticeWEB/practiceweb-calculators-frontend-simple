@@ -5,67 +5,81 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
 <template>
     <div class="practiceweb-calculator">
         <div class="content-container">
-          <div class="practiceweb-calculator-header--width">
-            <h3 class="practiceweb-calculator-header">{{ dutyName }}</h3>
+
+
+          <div class="pw-calc-header">
+            <h3 class="pw-calc-header__title">{{ dutyName }}</h3>
           </div>
+
+
           <form class="input" @submit.prevent="submitCalculation">
-            <fieldset class="input-fields">
-              <p class="input-fields__title">Region:</p>
-              <div class="form-group form-group--mobile flex-wrap">
-                <label class="input-field--label radio-spacing"  :class="{active: input.region === 'england'}">
-                  <input type="radio" v-model="input.region" value="england" class="input-field input-field--radio" :checked="checked"/>England & Northern Ireland
+            <fieldset class="form-item">
+              <p class="form-item__title">Region:</p>
+              <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'england'}">
+                  <input type="radio" v-model="input.region" value="england" class="form-item__input form-item__input--radio form-item__input--radio" :checked="checked"/>England & Northern Ireland
                 </label>
-                <label class="input-field--label radio-spacing"  :class="{active: input.region === 'wales'}">
-                  <input type="radio" v-model="input.region" value="wales" class="input-field input-field--radio" :checked="checked"/>Wales
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'wales'}">
+                  <input type="radio" v-model="input.region" value="wales" class="form-item__input form-item__input--radio" :checked="checked"/>Wales
                 </label>
-                <label class="input-field--label radio-spacing"  :class="{active: input.region === 'scotland'}">
-                  <input type="radio" v-model="input.region" value="scotland" class="input-field input-field--radio" :checked="checked"/>Scotland
-                </label>
-              </div>
-            </fieldset>
-            <fieldset class="input-fields">
-              <p class="input-fields__title">Type of property:</p>
-              <div class="form-group form-group--mobile flex-wrap">
-                <label class="input-field--label radio-spacing"  :class="{active: input.type === 'residential'}">
-                  <input type="radio" v-model="input.type" value="residential" class="input-field input-field--radio" :checked="checked"/>Residential
-                </label>
-                <label class="input-field--label radio-spacing"  :class="{active: input.type === 'nonresidential'}">
-                  <input type="radio" v-model="input.type" value="nonresidential" class="input-field input-field--radio" :checked="checked"/>Non-residential
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'scotland'}">
+                  <input type="radio" v-model="input.region" value="scotland" class="form-item__input form-item__input--radio" :checked="checked"/>Scotland
                 </label>
               </div>
             </fieldset>
-            <fieldset class="input-fields">
-              <p class="input-fields__title">Are you a first time buyer?</p>
-              <div class="form-group form-group--mobile flex-wrap">
-                <label class="input-field--label radio-spacing"  :class="{active: input.firstTime === 'yes'}">
-                  <input type="radio" v-model="input.firstTime" value="yes" class="input-field input-field--radio" :checked="checked"/>Yes
+
+
+            <fieldset class="form-item">
+              <p class="form-item__title">Type of property:</p>
+              <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.type === 'residential'}">
+                  <input type="radio" v-model="input.type" value="residential" class="form-item__input form-item__input--radio" :checked="checked"/>Residential
                 </label>
-                <label class="input-field--label radio-spacing"  :class="{active: input.firstTime === 'no'}">
-                  <input type="radio" v-model="input.firstTime" value="no" class="input-field input-field--radio" :checked="checked"/>No
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.type === 'nonresidential'}">
+                  <input type="radio" v-model="input.type" value="nonresidential" class="form-item__input form-item__input--radio" :checked="checked"/>Non-residential
                 </label>
               </div>
             </fieldset>
-            <fieldset class="input-fields">
-              <p class="input-fields__title">Property Value</p>
-              <div class="form-group form-group--gross flex-wrap">
-                <input name="propertyValue" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.propertyValue" class="input-field input-field--number" placeholder="Enter your property value here"/>
+
+
+            <fieldset class="form-item">
+              <p class="form-item__title">Are you a first time buyer?</p>
+              <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+                <label class="form-item__label form-item__label form-item__label--radio-spacing"  :class="{active: input.firstTime === 'yes'}">
+                  <input type="radio" v-model="input.firstTime" value="yes" class="form-item__input form-item__input--radio" :checked="checked"/>Yes
+                </label>
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.firstTime === 'no'}">
+                  <input type="radio" v-model="input.firstTime" value="no" class="form-item__input form-item__input--radio" :checked="checked"/>No
+                </label>
               </div>
             </fieldset>
-            <button type="submit" class="calculate-button" :class="classes.button">Calculate</button>
+
+
+            <fieldset class="form-item">
+              <p class="form-item__title">Property Value</p>
+              <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+                <input name="propertyValue" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.propertyValue" class="form-item__input form-item__input--number" placeholder="Enter your property value here"/>
+              </div>
+            </fieldset>
+
+
+            <button type="submit" class="pw-calc-button" :class="classes.button">Calculate</button>
           </form>
           <br>
-          <div class="output" v-if="Object.keys(output).length > 0">
-            <div class="output-list">
-              <div class="sub-values flex flex-wrap">
-                <dt class="value-label inline">{{ dutyName }}:</dt>
-                <dd class="value-items inline">{{ output.duty | currency }}</dd>
-                <dt class="value-label inline property-output" v-if="output.secondHomeDuty">Second Home Duty:</dt>
-                <dd class="value-items inline" v-if="output.secondHomeDuty">{{ output.secondHomeDuty | currency }}</dd>
-              </div>
+
+
+          <div class="pw-calc-output" v-if="Object.keys(output).length > 0">
+            <div class="pw-calc-output__wrapper flex flex-wrap">
+              <dt class="pw-calc-output__item pw-calc-output__item--label inline">{{ dutyName }}:</dt>
+              <dd class="pw-calc-output__item pw-calc-output__item--value inline">{{ output.duty | currency }}</dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label inline property-output" v-if="output.secondHomeDuty">Second Home Duty:</dt>
+              <dd class="pw-calc-output__item pw-calc-output__item--value inline" v-if="output.secondHomeDuty">{{ output.secondHomeDuty | currency }}</dd>
             </div>
           </div>
         </div>
     </div>
+
+
 </template>
 
 <script>

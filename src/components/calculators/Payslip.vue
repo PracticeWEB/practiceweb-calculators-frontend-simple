@@ -1,91 +1,107 @@
 <!--
 Payslip calculator.
 -->
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <div class="practiceweb-calculator">
-    <div class="practiceweb-calculator-header--width">
-      <h3 class="practiceweb-calculator-header">Payslip Calculator</h3>
+
+
+    <div class="pw-calc-header">
+      <h3 class="pw-calc-header__title">Payslip Calculator</h3>
     </div>
+
+
     <form class="input input--width" @submit.prevent="submitCalculation">
-      <fieldset class="input-fields">
-        <p class="input-fields__title">Gross Pay *</p>
-        <div class="form-group form-group--gross flex-wrap">
-          <span class="input-field--specialCharacter input-field--specialCharacter--pound">&#163;</span>
-          <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.grossPay" class="input-field input-field--number border-left" placeholder="Enter your gross pay here"/>
-          <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Annual'}">
-            <input type="radio" v-model="input.period" value="Annual" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Annual
+      <fieldset class="form-item">
+        <p class="form-item__title">Gross Pay *</p>
+        <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
+          <span class="form-item__character form-item__character--pound">&#163;</span>
+          <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.grossPay" class="form-item__input form-item__input--number border-left" placeholder="Enter your gross pay here"/>
+          <label class="form-item__label flex-grow border-left" :class="{active: input.period === 'Annual'}">
+            <input type="radio" v-model="input.period" value="Annual" class="form-item__input form-item__input--radio form-item__input--radio--hidden" :checked="checked"/>Annual
           </label>
-          <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Monthly'}">
-            <input type="radio" v-model="input.period" value="Monthly" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Monthly
+          <label class="form-item__label flex-grow border-left" :class="{active: input.period === 'Monthly'}">
+            <input type="radio" v-model="input.period" value="Monthly" class="form-item__input form-item__input--radio form-item__input--radio--hidden" :checked="checked"/>Monthly
           </label>
-          <label class="input-field--label flex-grow border-left" :class="{active: input.period === 'Weekly'}">
-            <input type="radio" v-model="input.period" value="Weekly" class="input-field input-field--radio input-field--radio--hidden" :checked="checked"/>Weekly
-          </label>
-        </div>
-      </fieldset>
-      <fieldset class="input-fields">
-        <p class="input-fields__title">Where do you pay income Tax? *</p>
-        <div class="form-group form-group--mobile flex-wrap">
-          <label class="input-field--label radio-spacing"  :class="{active: input.region === 'england'}">
-            <input type="radio" v-model="input.region" value="england" class="input-field input-field--radio" :checked="checked"/>England, Wales, Northern Ireland
-          </label>
-          <label class="input-field--label radio-spacing"  :class="{active: input.region === 'scotland'}">
-            <input type="radio" v-model="input.region" value="scotland" class="input-field input-field--radio" :checked="checked"/>Scotland
+          <label class="form-item__label flex-grow border-left" :class="{active: input.period === 'Weekly'}">
+            <input type="radio" v-model="input.period" value="Weekly" class="form-item__input form-item__input--radio form-item__input--radio--hidden" :checked="checked"/>Weekly
           </label>
         </div>
       </fieldset>
-      <fieldset class="input-fields">
-        <p class="input-fields__title">Percentage of salary paid into pension</p>
-        <div class="form-group">
+
+
+      <fieldset class="form-item">
+        <p class="form-item__title">Where do you pay income Tax? *</p>
+        <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'england'}">
+            <input type="radio" v-model="input.region" value="england" class="form-item__input form-item__input--radio" :checked="checked"/>England, Wales, Northern Ireland
+          </label>
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'scotland'}">
+            <input type="radio" v-model="input.region" value="scotland" class="form-item__input form-item__input--radio" :checked="checked"/>Scotland
+          </label>
+        </div>
+      </fieldset>
+
+
+      <fieldset class="form-item">
+        <p class="form-item__title">Percentage of salary paid into pension</p>
+        <div class="form-item__wrapper">
           <div class="flex flex-grow">
-            <input type="number" min="0" v-model.number="input.pensionPercentage" class="input-field input-field--number">
-            <span class="input-field--specialCharacter input-field--specialCharacter--percent inline border-left">&#37;</span>
+            <input type="number" min="0" v-model.number="input.pensionPercentage" class="form-item__input form-item__input--number">
+            <span class="form-item__character form-item__character--percent inline border-left">&#37;</span>
           </div>
         </div>
       </fieldset>
-      <fieldset class="input-fields">
-        <p class="input-fields__title">Pension scheme</p>
-        <div class="form-group form-group--twos">
-          <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'auto'}">
-            <input type="radio" v-model="input.pensionType" value="auto" class="input-field input-field--radio" :checked="checked"/>Auto-enrolment
+
+
+      <fieldset class="form-item">
+        <p class="form-item__title">Pension scheme</p>
+        <div class="form-item__wrapper form-item__wrapper--two">
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.pensionType === 'auto'}">
+            <input type="radio" v-model="input.pensionType" value="auto" class="form-item__input form-item__input--radio" :checked="checked"/>Auto-enrolment
           </label>
-          <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'employer'}">
-            <input type="radio" v-model="input.pensionType" value="employer" class="input-field input-field--radio" :checked="checked"/>Employer
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.pensionType === 'employer'}">
+            <input type="radio" v-model="input.pensionType" value="employer" class="form-item__input form-item__input--radio" :checked="checked"/>Employer
           </label>
-          <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'sacrifice'}">
-            <input type="radio" v-model="input.pensionType" value="sacrifice" class="input-field input-field--radio" :checked="checked"/>Salary sacrifice
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.pensionType === 'sacrifice'}">
+            <input type="radio" v-model="input.pensionType" value="sacrifice" class="form-item__input form-item__input--radio" :checked="checked"/>Salary sacrifice
           </label>
-          <label class="input-field--label radio-spacing"  :class="{active: input.pensionType === 'personal'}">
-            <input type="radio" v-model="input.pensionType" value="personal" class="input-field input-field--radio" :checked="checked"/>Personal
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.pensionType === 'personal'}">
+            <input type="radio" v-model="input.pensionType" value="personal" class="form-item__input form-item__input--radio" :checked="checked"/>Personal
           </label>
         </div>
         <div v-if="input.pensionType === 'sacrifice'">
           <p>Has the sacrifice been applied above?<input type="checkbox" v-model="input.salarySacrificeApplied"></p>
         </div>
       </fieldset>
-      <fieldset class="input-fields">
-        <p class="input-fields__title">Student Loan?</p>
-        <div class="form-group form-group--loan-twos form-group--mobile">
-          <fieldset class="input-fields">
-            <label class="input-field--label radio-spacing"  :class="{active: input.hasStudentLoan === true}">
-              <input type="checkbox" v-model="input.hasStudentLoan" class="input-field input-field--radio" :checked="checked"/>Are you repaying a student loan?
+
+
+      <fieldset class="form-item">
+        <p class="form-item__title">Student Loan?</p>
+        <div class="form-item__wrapper form-item__wrapper--loan--two form-item__wrapper--mobile">
+          <fieldset class="form-item">
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.hasStudentLoan === true}">
+              <input type="checkbox" v-model="input.hasStudentLoan" class="form-item__input form-item__input--radio" :checked="checked"/>Are you repaying a student loan?
             </label>
           </fieldset>
-          <fieldset class="input-fields" v-if="input.hasStudentLoan">
-            <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'before'}">
-              <input type="radio" v-model="input.studentLoan2012" value="before" class="input-field input-field--radio" :checked="checked"/>Before 1st Sept 2012
+
+
+          <fieldset class="form-item" v-if="input.hasStudentLoan">
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoan2012 === 'before'}">
+              <input type="radio" v-model="input.studentLoan2012" value="before" class="form-item__input form-item__input--radio" :checked="checked"/>Before 1st Sept 2012
             </label>
-            <label class="input-field--label radio-spacing"  :class="{active: input.studentLoan2012 === 'after'}">
-              <input type="radio" v-model="input.studentLoan2012" value="after" class="input-field input-field--radio" :checked="checked"/>After 1st Sept 2012
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoan2012 === 'after'}">
+              <input type="radio" v-model="input.studentLoan2012" value="after" class="form-item__input form-item__input--radio" :checked="checked"/>After 1st Sept 2012
             </label>
           </fieldset>
-          <fieldset class="input-fields" v-if="input.studentLoan2012 === 'after'">
-            <p class="input-fields__title">Where did you live when you applied for the loan?</p>
-            <label class="input-field--label radio-spacing"  :class="{active: input.studentLoanLocation === 'england'}">
-              <input type="radio" v-model="input.studentLoanLocation" value="england" class="input-field input-field--radio" :checked="checked"/>England or Wales
+
+
+          <fieldset class="form-item" v-if="input.studentLoan2012 === 'after'">
+            <p class="form-item__title">Where did you live when you applied for the loan?</p>
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoanLocation === 'england'}">
+              <input type="radio" v-model="input.studentLoanLocation" value="england" class="form-item__input form-item__input--radio" :checked="checked"/>England or Wales
             </label>
-            <label class="input-field--label radio-spacing"  :class="{active: input.studentLoanLocation === 'scotland'}">
-              <input type="radio" v-model="input.studentLoanLocation" value="scotland" class="input-field input-field--radio" :checked="checked"/>Scotland or Northern Ireland
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoanLocation === 'scotland'}">
+              <input type="radio" v-model="input.studentLoanLocation" value="scotland" class="form-item__input form-item__input--radio" :checked="checked"/>Scotland or Northern Ireland
             </label>
             <p>You will be covered under {{ studentLoanPlan }}</p>
           </fieldset>
@@ -93,59 +109,70 @@ Payslip calculator.
         <!--</fieldset>-->
       </fieldset>
       <!--</fieldset>-->
-      <button type="submit" class="calculate-button" :class="classes.button" @click="setResult">Calculate</button>
+
+
+      <button type="submit" class="pw-calc-button" :class="classes.button" @click="setResult">Calculate</button>
     </form>
-    <div class="output output--width" v-if="Object.keys(output).length > 0">
+
+
+    <div class="pw-calc-output pw-calc-output__width" v-if="Object.keys(output).length > 0">
       <template v-if="payslipResult">
-        <p class="output-description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
+        <p class="pw-calc-output__description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
       </template>
+
+
       <tabs>
         <tab :key="'annual'" :name="tabNames.annual">
           <dl>
-            <div class="main-value">
-              <dt class="value-items value-title">Net Pay:</dt>
-              <dd class="value-items value-number">{{ output.annual.netPay | currency }} </dd>
+            <div class="pw-calc-output__main">
+              <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt>
+              <dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.netPay | currency }} </dd>
             </div>
-            <p class="values-header">Breakdown</p>
-            <div class="sub-values">
-              <dt class="value-items value-label">PAYE Deduction:</dt><dd class="value-items value-number">{{ output.annual.payeDeduction | currency }}</dd>
-              <dt class="value-items value-label">NI Deduction:</dt><dd class="value-items value-number">{{ output.annual.niDeduction | currency }} </dd>
-              <dt class="value-items value-label">Student Loan Deduction:</dt><dd class="value-items value-number">{{ output.annual.studentLoanDeduction | currency }} </dd>
-              <dt class="value-items value-label">Employers NI:</dt><dd class="value-items value-number">{{ output.annual.employerContribution | currency }} </dd>
-              <dt class="value-items value-label">Employers Cost:</dt><dd class="value-items value-number">{{ output.annual.employerCost | currency }} </dd>
-              <dt class="value-items value-label">Pension contributions:</dt><dd class="value-items value-number">{{ output.annual.pensionContribution | currency }}</dd>
+            <p class="pw-calc-output__values-header">Breakdown</p>
+            <div class="pw-calc-output__wrapper">
+              <dt class="pw-calc-output__item pw-calc-output__item--label">PAYE Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.payeDeduction | currency }}</dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">NI Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.niDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Student Loan Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.studentLoanDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers NI:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.employerContribution | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers Cost:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.employerCost | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Pension contributions:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.pensionContribution | currency }}</dd>
             </div>
           </dl>
         </tab>
+
+
         <tab :key="'month'" :name="tabNames.month">
           <dl>
-            <div class="main-value">
-              <dt class="value-items value-title">Net Pay:</dt><dd class="value-items value-number">{{ output.month.netPay | currency }} </dd>
+            <div class="pw-calc-output__main">
+              <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt>
+              <dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.netPay | currency }} </dd>
             </div>
-            <p class="values-header">Breakdown</p>
-            <div class="sub-values">
-              <dt class="value-items value-label">PAYE Deduction:</dt><dd class="value-items value-number">{{ output.month.payeDeduction | currency }}</dd>
-              <dt class="value-items value-label">NI Deduction:</dt><dd class="value-items value-number">{{ output.month.niDeduction | currency }} </dd>
-              <dt class="value-items value-label">Student Loan Deduction:</dt><dd class="value-items value-number">{{ output.month.studentLoanDeduction | currency }} </dd>
-              <dt class="value-items value-label">Employers NI:</dt><dd class="value-items value-number">{{ output.month.employerContribution | currency }} </dd>
-              <dt class="value-items value-label">Employers Cost:</dt><dd class="value-items value-number">{{ output.month.employerCost | currency }} </dd>
-              <dt class="value-items value-label">Pension contributions:</dt><dd class="value-items value-number">{{ output.month.pensionContribution | currency }}</dd>
+            <p class="pw-calc-output__values-header">Breakdown</p>
+            <div class="pw-calc-output__wrapper">
+              <dt class="pw-calc-output__item pw-calc-output__item--label">PAYE Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.payeDeduction | currency }}</dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">NI Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.niDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Student Loan Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.studentLoanDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers NI:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.employerContribution | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers Cost:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.employerCost | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Pension contributions:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.pensionContribution | currency }}</dd>
             </div>
           </dl>
         </tab>
+
+
         <tab :key="'week'" :name="tabNames.week">
           <dl>
-            <div class="main-value">
-              <dt class="value-items value-title">Net Pay:</dt><dd class="value-items value-number">{{ output.week.netPay | currency }} </dd>
+            <div class="pw-calc-output__main">
+              <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.netPay | currency }} </dd>
             </div>
-            <p class="values-header">Breakdown</p>
-            <div class="sub-values">
-              <dt class="value-items value-label">PAYE Deduction:</dt><dd class="value-items value-number">{{ output.week.payeDeduction | currency }}</dd>
-              <dt class="value-items value-label">NI Deduction:</dt><dd class="value-items value-number">{{ output.week.niDeduction | currency }} </dd>
-              <dt class="value-items value-label">Student Loan Deduction:</dt><dd class="value-items value-number">{{ output.week.studentLoanDeduction | currency }} </dd>
-              <dt class="value-items value-label">Employers NI:</dt><dd class="value-items value-number">{{ output.week.employerContribution | currency }} </dd>
-              <dt class="value-items value-label">Employers Cost:</dt><dd class="value-items value-number">{{ output.week.employerCost | currency }} </dd>
-              <dt class="value-items value-label">Pension contributions:</dt><dd class="value-items value-number">{{ output.week.pensionContribution | currency }}</dd>
+            <p class="pw-calc-output__values-header">Breakdown</p>
+            <div class="pw-calc-output__wrapper">
+              <dt class="pw-calc-output__item pw-calc-output__item--label">PAYE Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.payeDeduction | currency }}</dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">NI Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.niDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Student Loan Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.studentLoanDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers NI:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.employerContribution | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers Cost:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.employerCost | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Pension contributions:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.pensionContribution | currency }}</dd>
             </div>
           </dl>
         </tab>

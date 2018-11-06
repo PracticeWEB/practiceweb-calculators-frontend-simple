@@ -4,42 +4,53 @@ Fuel Cost calculator.
 <template>
     <div class="practiceweb-calculator">
       <div class="content-container">
-        <div class="practiceweb-calculator-header--width">
-          <h3 class="practiceweb-calculator-header">Fuel Cost Calculator</h3>
+
+
+        <div class="pw-calc-header">
+          <h3 class="pw-calc-header__title">Fuel Cost Calculator</h3>
         </div>
+
+
         <form @submit.prevent="submitCalculation">
-          <fieldset class="input-fields">
-            <p class="input-fields__title">Annual Mileage:</p>
-            <div class="form-group form-group--gross flex-wrap">
-              <input type="number" min="1" v-model.number="input.annualMileage" step="0.01" class="input-field input-field--number">
+          <fieldset class="form-item">
+            <p class="form-item__title">Annual Mileage:</p>
+            <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
+              <input type="number" min="1" v-model.number="input.annualMileage" step="0.01" class="form-item__input form-item__input--number">
             </div>
           </fieldset>
-          <fieldset class="input-fields">
-            <p class="input-fields__title">Price per Litre:</p>
-            <div class="form-group form-group--gross flex-wrap">
-              <input type="number" min="1" v-model.number="input.pricePerLitre" class="input-field input-field--number">
+
+
+          <fieldset class="form-item">
+            <p class="form-item__title">Price per Litre:</p>
+            <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
+              <input type="number" min="1" v-model.number="input.pricePerLitre" class="form-item__input form-item__input--number">
             </div>
           </fieldset>
-          <fieldset class="input-fields">
-            <p class="input-fields__title">Miles per Gallon:</p>
-            <div class="form-group form-group--gross flex-wrap">
-              <input type="number" min="1" v-model.number="input.milesPerGallon" step="0.01" class="input-field input-field--number">
+
+
+          <fieldset class="form-item">
+            <p class="form-item__title">Miles per Gallon:</p>
+            <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
+              <input type="number" min="1" v-model.number="input.milesPerGallon" step="0.01" class="form-item__input form-item__input--number">
             </div>
           </fieldset>
-            <button type="submit" class="calculate-button" :class="classes.button">Calculate</button>
+
+
+            <button type="submit" class="pw-calc-button" :class="classes.button">Calculate</button>
         </form>
         <br>
-        <div class="output" v-if="Object.keys(output).length > 0">
-          <div class="output-list">
-            <div class="sub-values flex flex-wrap">
-              <dt class="value-label inline">Fuel Cost:</dt>
-              <dd class="value-items inline">{{ output.fuelCost | currency }}</dd>
-            </div>
+
+
+        <div class="pw-calc-output" v-if="Object.keys(output).length > 0">
+          <div class="pw-calc-output__wrapper flex flex-wrap">
+            <dt class="pw-calc-output__item pw-calc-output__item--label inline">Fuel Cost:</dt>
+            <dd class="pw-calc-output__item pw-calc-output__item--value inline">{{ output.fuelCost | currency }}</dd>
           </div>
         </div>
       </div>
     </div>
 </template>
+
 
 <script>
 import CalculatorAPIMixin from '../../mixins/CalculatorAPI'

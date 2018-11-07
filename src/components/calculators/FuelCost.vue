@@ -17,7 +17,7 @@ Fuel Cost calculator.
           <fieldset class="form-item">
             <p class="form-item__title">Price per Litre:</p>
             <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
-              <input type="number" min="1" v-model.number="input.pricePerLitre" class="form-item__input form-item__input--number">
+              <input type="number" min="1" v-model.number="input.pricePerLitre" step="0.01" class="form-item__input form-item__input--number">
             </div>
           </fieldset>
           <fieldset class="form-item">

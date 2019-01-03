@@ -13,13 +13,13 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
               <p class="form-item__title">Region:</p>
               <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
                 <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'england'}">
-                  <input type="radio" v-model="input.region" value="england" class="form-item__input form-item__input--radio form-item__input--radio" :checked="checked"/>England & Northern Ireland
+                  <input type="radio" v-model="input.region" value="england" class="form-item__input form-item__input--radio form-item__input--radio"/>England & Northern Ireland
                 </label>
                 <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'wales'}">
-                  <input type="radio" v-model="input.region" value="wales" class="form-item__input form-item__input--radio" :checked="checked"/>Wales
+                  <input type="radio" v-model="input.region" value="wales" class="form-item__input form-item__input--radio"/>Wales
                 </label>
                 <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'scotland'}">
-                  <input type="radio" v-model="input.region" value="scotland" class="form-item__input form-item__input--radio" :checked="checked"/>Scotland
+                  <input type="radio" v-model="input.region" value="scotland" class="form-item__input form-item__input--radio"/>Scotland
                 </label>
               </div>
             </fieldset>
@@ -27,10 +27,10 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
               <p class="form-item__title">Type of property:</p>
               <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
                 <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.type === 'residential'}">
-                  <input type="radio" v-model="input.type" value="residential" class="form-item__input form-item__input--radio" :checked="checked"/>Residential
+                  <input type="radio" v-model="input.type" value="residential" class="form-item__input form-item__input--radio"/>Residential
                 </label>
                 <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.type === 'nonresidential'}">
-                  <input type="radio" v-model="input.type" value="nonresidential" class="form-item__input form-item__input--radio" :checked="checked"/>Non-residential
+                  <input type="radio" v-model="input.type" value="nonresidential" class="form-item__input form-item__input--radio"/>Non-residential
                 </label>
               </div>
             </fieldset>
@@ -38,10 +38,10 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
               <p class="form-item__title">Are you a first time buyer?</p>
               <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
                 <label class="form-item__label form-item__label form-item__label--radio-spacing"  :class="{active: input.firstTime === 'yes'}">
-                  <input type="radio" v-model="input.firstTime" value="yes" class="form-item__input form-item__input--radio" :checked="checked"/>Yes
+                  <input type="radio" v-model="input.firstTime" value="yes" class="form-item__input form-item__input--radio"/>Yes
                 </label>
                 <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.firstTime === 'no'}">
-                  <input type="radio" v-model="input.firstTime" value="no" class="form-item__input form-item__input--radio" :checked="checked"/>No
+                  <input type="radio" v-model="input.firstTime" value="no" class="form-item__input form-item__input--radio"/>No
                 </label>
               </div>
             </fieldset>

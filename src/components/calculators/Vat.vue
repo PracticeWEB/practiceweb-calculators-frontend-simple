@@ -19,10 +19,10 @@ Vat calculator component.
           <p class="form-item__title">VAT included? *</p>
           <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
             <label class="form-item__label form-item__label--radio-spacing" :class="{active: input.included === '1'}">
-              <input type="radio" v-model="input.included" value="1" :checked="checked"/>Yes
+              <input type="radio" v-model="input.included" value="1"/>Yes
             </label>
             <label class="form-item__label form-item__label--radio-spacing" :class="{active: input.included === '0'}">
-              <input type="radio" v-model="input.included" value="0" :checked="checked"/>No
+              <input type="radio" v-model="input.included" value="0"/>No
             </label>
           </div>
         </fieldset>

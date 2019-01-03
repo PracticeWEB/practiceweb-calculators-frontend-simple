@@ -2,46 +2,73 @@
 Vat calculator component.
 -->
 <template>
-    <div class="calculator-container practiceweb-calculator">
-    <form @submit.prevent="submitCalculation">
-        <label>
-            Value
-            <input type="number" step="0.01" v-model.number="input.value"/>
-        </label>
-        <label>
-            VAT included?
-            Yes <input type="radio" v-model="input.included" value="1"/>
-            No <input type="radio" v-model="input.included" value="0"/>
-        </label>
-        <button type="submit">Calculate</button>
-    </form>
-    <div v-if="Object.keys(output).length > 0">
-        <ul>
-            <li><span>Net: {{ output.net | currency }} </span></li>
-            <li><span>VAT: {{ output.vat | currency }} </span></li>
-            <li><span>Gross: {{ output.gross | currency }} </span></li>
-        </ul>
+  <div class="calculator-container pw-calc">
+    <div class="content-container">
+      <form class="input" @submit.prevent="submitCalculation">
+        <div class="pw-calc-header">
+          <h3 class="pw-calc-header__title">VAT Calculator</h3>
+        </div>
+        <fieldset class="form-item">
+          <p class="form-item__title">Value *</p>
+          <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
+            <span class="form-item__character form-item__character--pound">&#163;</span>
+            <input class="form-item__input form-item__input--number" border-left type='number' step="0.01" v-model.number="input.value" placeholder="Enter your value here"/>
+          </div>
+        </fieldset>
+        <fieldset class="form-item">
+          <p class="form-item__title">VAT included? *</p>
+          <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+            <label class="form-item__label form-item__label--radio-spacing" :class="{active: input.included === '1'}">
+              <input type="radio" v-model="input.included" value="1" :checked="checked"/>Yes
+            </label>
+            <label class="form-item__label form-item__label--radio-spacing" :class="{active: input.included === '0'}">
+              <input type="radio" v-model="input.included" value="0" :checked="checked"/>No
+            </label>
+          </div>
+        </fieldset>
+        <button type="submit" class="pw-calc-button" :class="classes.button">Calculate</button>
+      </form>
+      <br>
+      <div class="pw-calc-output" v-if="Object.keys(output).length > 0">
+        <div class="pw-calc-output__wrapper flex flex-wrap">
+          <dt class="pw-calc-output__item pw-calc-output__item--label">Net:</dt>
+          <dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.net | currency }}</dd>
+          <dt class="pw-calc-output__item pw-calc-output__item--label">VAT:</dt>
+          <dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.vat | currency }}</dd>
+          <dt class="pw-calc-output__item pw-calc-output__item--label">Gross:</dt>
+          <dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.gross | currency }}</dd>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
-
-import CalculatorAPIMixin from '../../mixins/CalculatorAPI'
-export default {
-  name: 'Vat',
-  mixins: [CalculatorAPIMixin],
-  created: function () {
-    this.servicePath = '/calculator/vat'
-  },
-  data: function () {
-    return {
-      input: {
-        included: 1,
-        value: 0
-      },
-      output: {}
+  import CalculatorAPIMixin from '../../mixins/CalculatorAPI'
+  import CalculatorStyle from '../../mixins/CalculatorStyle'
+  export default {
+    name: 'Vat',
+    mixins: [CalculatorAPIMixin, CalculatorStyle],
+    created: function () {
+      this.servicePath = '/calculator/vat'
+      this.tabNames = {
+        net: 'Net Pay',
+        vat: 'VAT',
+        gross: 'Gross'
+      }
+    },
+    data: function () {
+      return {
+        input: {
+          included: 1,
+          value: 0
+        },
+        output: {}
+      }
     }
   }
-}
 </script>
+
+<style lang="scss">
+  @import "../../scss/globals.scss";
+</style>

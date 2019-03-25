@@ -4,28 +4,47 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
 -->
 <template>
     <div class="practiceweb-calculator">
-        <span>{{ dutyName }}</span>
-        <form @submit.prevent="submitCalculation">
-            <fieldset>
-                <legend>Region:</legend>
-                <label>England & Northern Ireland<input type="radio" v-model="input.region" value="england"/></label>
-                <label>Wales <input type="radio" v-model="input.region" value="wales"/></label>
-                <label>Scotland <input type="radio" v-model="input.region" value="scotland"/></label>
+        <div class="content-container">
+          <div class="pw-calc-header">
+            <h3 class="pw-calc-header__title">{{ dutyName }}</h3>
+          </div>
+          <form class="input" @submit.prevent="submitCalculation">
+            <fieldset class="form-item">
+              <p class="form-item__title">Region:</p>
+              <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'england'}">
+                  <input type="radio" v-model="input.region" value="england" class="form-item__input form-item__input--radio form-item__input--radio"/>England & Northern Ireland
+                </label>
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'wales'}">
+                  <input type="radio" v-model="input.region" value="wales" class="form-item__input form-item__input--radio"/>Wales
+                </label>
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'scotland'}">
+                  <input type="radio" v-model="input.region" value="scotland" class="form-item__input form-item__input--radio"/>Scotland
+                </label>
+              </div>
             </fieldset>
-            <fieldset>
-                <legend>Type of property</legend>
-                <label>Residential<input type="radio" v-model="input.type" value="residential"></label>
-                <label>Non-residential<input type="radio" v-model="input.type" value="nonresidential"></label>
+            <fieldset class="form-item">
+              <p class="form-item__title">Type of property:</p>
+              <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.type === 'residential'}">
+                  <input type="radio" v-model="input.type" value="residential" class="form-item__input form-item__input--radio"/>Residential
+                </label>
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.type === 'nonresidential'}">
+                  <input type="radio" v-model="input.type" value="nonresidential" class="form-item__input form-item__input--radio"/>Non-residential
+                </label>
+              </div>
             </fieldset>
-            <fieldset v-if="input.type == 'residential'">
-                <legend>Are you a first time buyer?</legend>
-                <label>Yes <input type="radio" v-model="input.firstTime" value="yes" /></label>
-                <label>No <input type="radio" v-model="input.firstTime" value="no" /></label>
+            <fieldset class="form-item">
+              <p class="form-item__title">Are you a first time buyer?</p>
+              <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+                <label class="form-item__label form-item__label form-item__label--radio-spacing"  :class="{active: input.firstTime === 'yes'}">
+                  <input type="radio" v-model="input.firstTime" value="yes" class="form-item__input form-item__input--radio"/>Yes
+                </label>
+                <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.firstTime === 'no'}">
+                  <input type="radio" v-model="input.firstTime" value="no" class="form-item__input form-item__input--radio"/>No
+                </label>
+              </div>
             </fieldset>
-            <label>
-                Property Value
-                <input type="number" v-model.number="input.propertyValue"/>
-            </label>
             <fieldset class="form-item">
               <p class="form-item__title">Property Value</p>
               <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
@@ -44,7 +63,6 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
               </div>
             </fieldset>
             <button type="submit" class="pw-calc-button" :class="classes.button">Calculate</button>
-            <button type="submit">Calculate</button>
         </form>
         <div v-if="Object.keys(output).length > 0">
           <ul>
@@ -61,15 +79,18 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
             </div>
           </div>
         </div>
+      </div>
     </div>
 </template>
 
 <script>
 
 import CalculatorAPIMixin from '../../mixins/CalculatorAPI'
+import CalculatorStyle from '../../mixins/CalculatorStyle'
+
 export default {
   name: 'PropertyTaxes',
-  mixins: [CalculatorAPIMixin],
+  mixins: [CalculatorAPIMixin, CalculatorStyle],
   created: function () {
     this.servicePath = '/calculator/propertytaxes'
   },
@@ -100,3 +121,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import "../../scss/globals.scss";
+</style>

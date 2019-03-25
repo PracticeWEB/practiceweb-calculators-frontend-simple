@@ -1,5 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import '@babel/polyfill'
 import Vue from 'vue'
 import Tabs from 'vue-tabs-component'
 import VeeValidate from 'vee-validate'
@@ -22,7 +23,8 @@ Vue.filter('currency', (value) => {
 })
 
 // Get all calculators on the page by class.
-document.querySelectorAll('.practiceweb-calculator').forEach((calculator) => {
+Array.from(document.querySelectorAll('.practiceweb-calculator')).forEach((calculator) => {
+// document.querySelectorAll('.practiceweb-calculator').forEach((calculator) => {
   let calculatorName = calculator.dataset.calculatorname
   // Service root should be the base path to the API server.
   let serviceRoot = calculator.dataset.serviceroot

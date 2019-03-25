@@ -12,6 +12,7 @@
     "wordpress": "NODE_ENV=wordpress node build/buildWordpress.js"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "axios": "^0.18.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.3",

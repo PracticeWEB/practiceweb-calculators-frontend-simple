@@ -1,10 +1,63 @@
 <!--
 Payslip calculator.
 -->
-<template>
-    <div class="practiceweb-calculator">
-        <div class="practiceweb-calculator-header--width">
-            <h3 class="practiceweb-calculator-header">Payslip Calculator</h3>
+<template xmlns="http://www.w3.org/1999/html">
+  <div class="practiceweb-calculator">
+    <div class="pw-calc-header">
+      <h3 class="pw-calc-header__title">Payslip Calculator</h3>
+    </div>
+    <form class="input input--width" @submit.prevent="submitCalculation">
+      <fieldset class="form-item">
+        <p class="form-item__title">Gross Pay *</p>
+        <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
+          <span class="form-item__character form-item__character--pound">&#163;</span>
+          <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.grossPay" class="form-item__input form-item__input--number border-left" placeholder="Enter gross pay"/>
+          <label class="form-item__label flex-grow border-left" :class="{active: input.period === 'annual'}">
+            <input type="radio" v-model="input.period" value="annual" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>Annual
+          </label>
+          <label class="form-item__label flex-grow border-left" :class="{active: input.period === 'month'}">
+            <input type="radio" v-model="input.period" value="month" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>Monthly
+          </label>
+          <label class="form-item__label flex-grow border-left" :class="{active: input.period === 'week'}">
+            <input type="radio" v-model="input.period" value="week" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>Weekly
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="form-item">
+        <p class="form-item__title">Where do you pay income Tax? *</p>
+        <div class="form-item__wrapper form-item__wrapper--mobile flex-wrap">
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'england'}">
+            <input type="radio" v-model="input.region" value="england" class="form-item__input form-item__input--radio"/>England, Wales, Northern Ireland
+          </label>
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.region === 'scotland'}">
+            <input type="radio" v-model="input.region" value="scotland" class="form-item__input form-item__input--radio"/>Scotland
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="form-item">
+        <p class="form-item__title">Percentage of salary paid into pension</p>
+        <div class="form-item__wrapper">
+          <div class="flex">
+            <input type="number" min="0" v-model.number="input.pensionPercentage" class="form-item__input form-item__input--number">
+            <span class="form-item__character form-item__character--percent inline border-left">&#37;</span>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="form-item">
+        <p class="form-item__title">Pension scheme</p>
+        <div class="form-item__wrapper form-item__wrapper--two">
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.pensionType === 'auto'}">
+            <input type="radio" v-model="input.pensionType" value="auto" class="form-item__input form-item__input--radio"/>Auto-enrolment
+          </label>
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.pensionType === 'employer'}">
+            <input type="radio" v-model="input.pensionType" value="employer" class="form-item__input form-item__input--radio"/>Employer
+          </label>
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.pensionType === 'sacrifice'}">
+            <input type="radio" v-model="input.pensionType" value="sacrifice" class="form-item__input form-item__input--radio"/>Salary sacrifice
+          </label>
+          <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.pensionType === 'personal'}">
+            <input type="radio" v-model="input.pensionType" value="personal" class="form-item__input form-item__input--radio"/>Personal
+          </label>
         </div>
         <form class="input input--width" @submit.prevent="submitCalculation">
             <fieldset class="input-fields">
@@ -139,7 +192,106 @@ Payslip calculator.
               </tab>
             </tabs>
         </div>
+      </fieldset>
+      <fieldset class="form-item">
+        <p class="form-item__title">Student Loan?</p>
+        <div class="form-item__wrapper form-item__wrapper--loan--two form-item__wrapper--mobile">
+          <fieldset class="form-item">
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.hasStudentLoan === true}">
+              <input type="checkbox" v-model="input.hasStudentLoan" class="form-item__input form-item__input--radio"/>Are you repaying a student loan?
+            </label>
+          </fieldset>
+          <fieldset class="form-item" v-if="input.hasStudentLoan">
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoan2012 === 'before'}">
+              <input type="radio" v-model="input.studentLoan2012" value="before" class="form-item__input form-item__input--radio"/>Before 1st Sept 2012
+            </label>
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoan2012 === 'after'}">
+              <input type="radio" v-model="input.studentLoan2012" value="after" class="form-item__input form-item__input--radio"/>After 1st Sept 2012
+            </label>
+          </fieldset>
+          <fieldset class="form-item" v-if="input.studentLoan2012 === 'after'">
+            <p class="form-item__title">Where did you live when you applied for the loan?</p>
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoanLocation === 'england'}">
+              <input type="radio" v-model="input.studentLoanLocation" value="england" class="form-item__input form-item__input--radio"/>England or Wales
+            </label>
+            <label class="form-item__label form-item__label--radio-spacing"  :class="{active: input.studentLoanLocation === 'scotland'}">
+              <input type="radio" v-model="input.studentLoanLocation" value="scotland" class="form-item__input form-item__input--radio"/>Scotland or Northern Ireland
+            </label>
+            <p>You will be covered under {{ studentLoanPlan }}</p>
+          </fieldset>
+        </div>
+      </fieldset>
+      <fieldset class="form-item">
+        <p class="form-item__title">Tax year:</p>
+        <div class="form-item__wrapper form-item__wrapper--year-selector  flex-wrap">
+          <label class="form-item__label flex-grow" :class="{active: input.date === '2018'}">
+            <input type="radio" v-model="input.date" value="2018" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2018 Tax Year Calculation
+          </label>
+          <label class="form-item__label flex-grow border-left" :class="{active: input.date === '2019'}">
+            <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019 Tax Year Calculation
+          </label>
+        </div>
+      </fieldset>
+      <button type="submit" class="pw-calc-button" :class="classes.button" @click="setResult">Calculate</button>
+    </form>
+    <div class="pw-calc-output pw-calc-output__width pw-calc-output--tabs" v-if="Object.keys(output).length > 0">
+      <template v-if="payslipResult">
+        <p class="pw-calc-output__description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
+      </template>
+      <tabs>
+        <tab :key="'annual'" :name="tabNames.annual">
+          <dl>
+            <div class="pw-calc-output__main">
+              <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt>
+              <dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.netPay | currency }} </dd>
+            </div>
+            <p class="pw-calc-output__values-header">Breakdown</p>
+            <div class="pw-calc-output__wrapper">
+              <dt class="pw-calc-output__item pw-calc-output__item--label">PAYE Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.payeDeduction | currency }}</dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">NI Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.niDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Student Loan Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.studentLoanDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers NI:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.employerContribution | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers Cost:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.employerCost | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Pension contributions:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.annual.pensionContribution | currency }}</dd>
+            </div>
+          </dl>
+        </tab>
+        <tab :key="'month'" :name="tabNames.month">
+          <dl>
+            <div class="pw-calc-output__main">
+              <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt>
+              <dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.netPay | currency }} </dd>
+            </div>
+            <p class="pw-calc-output__values-header">Breakdown</p>
+            <div class="pw-calc-output__wrapper">
+              <dt class="pw-calc-output__item pw-calc-output__item--label">PAYE Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.payeDeduction | currency }}</dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">NI Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.niDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Student Loan Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.studentLoanDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers NI:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.employerContribution | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers Cost:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.employerCost | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Pension contributions:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.month.pensionContribution | currency }}</dd>
+            </div>
+          </dl>
+        </tab>
+        <tab :key="'week'" :name="tabNames.week">
+          <dl>
+            <div class="pw-calc-output__main">
+              <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.netPay | currency }} </dd>
+            </div>
+            <p class="pw-calc-output__values-header">Breakdown</p>
+            <div class="pw-calc-output__wrapper">
+              <dt class="pw-calc-output__item pw-calc-output__item--label">PAYE Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.payeDeduction | currency }}</dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">NI Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.niDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Student Loan Deduction:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.studentLoanDeduction | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers NI:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.employerContribution | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Employers Cost:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.employerCost | currency }} </dd>
+              <dt class="pw-calc-output__item pw-calc-output__item--label">Pension contributions:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.pensionContribution | currency }}</dd>
+            </div>
+          </dl>
+        </tab>
+      </tabs>
     </div>
+  </div>
 </template>
 
 <script>
@@ -165,8 +317,40 @@ export default {
         if (this.input.studentLoan2012 && this.input.studentLoanLocation === 'england') {
           loanPlan = 'plan 2'
         }
+        return loanPlan
       }
-      return loanPlan
+    },
+    watch: {
+      studentLoanPlan: function () {
+        // Because computed properties can't nest, the watch is used to copy the computed plan value into the input structure.
+        this.input.studentLoanPlan = this.studentLoanPlan
+      }
+    },
+    data: () => {
+      return {
+        input: {
+          period: 'annual',
+          pensionPercentage: 0,
+          pensionType: 'auto',
+          studentLoanLocation: 'england',
+          region: 'england',
+          studentLoan2012: 'before',
+          date: '2019'
+        },
+        output: {},
+        payslipResult: false,
+        resultPeriod: '',
+        resultGrossPay: null,
+        checked: ''
+      }
+    },
+    methods: {
+      setResult () {
+        this.resultPeriod = this.input.period
+        this.resultGrossPay = this.input.grossPay
+        this.payslipResult = true
+      },
+      return: loanPlan
     }
   },
   watch: {
@@ -200,350 +384,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-  // Start of Flex classes.
-    .flex {
-        display: flex;
-    }
-
-    .flex-wrap {
-      flex-wrap: wrap;
-    }
-
-    .flex-grow {
-      flex-grow: 1;
-    }
-
-    // End of Flex classes.
-
-    // Start of Global styles.
-
-    fieldset {
-      border: 0;
-    }
-
-    .inline {
-        display: inline-block;
-    }
-
-    .radio-spacing{
-        margin-right: 0;
-        border-radius: 4px;
-    }
-
-    button {
-      width: 100%;
-    }
-
-    // End of Global styles.
-
-    // Start of header styles.
-
-    .practiceweb-calculator {
-        margin: auto;
-        color: #333333;
-    }
-
-    .practiceweb-calculator-header {
-        font-weight: bold;
-        border-bottom: 5px solid #dce6eb;
-        padding-bottom: 1rem;
-    }
-
-    // End of header styles.
-
-    // Start of  Input styles.
-
-    .input--width {
-        width: 100%;
-        .input-fields {
-            padding: 1rem 0;
-            .input-fields__title {
-                padding-bottom: 0.5rem;
-            }
-        }
-    }
-
-    .input-fields__title {
-        font-weight: bold;
-    }
-
-    .input-fields {
-        .form-group {
-            display: flex;
-            .input-field {
-                border: 1px solid #dce6eb;
-                padding: 0.6875rem;
-            }
-            .input-field--label {
-                padding: 0.45rem 1rem;
-                border: 1px solid #dce6eb;
-                &:hover {
-                    background-color: #F2F2F2;
-                }
-                .input-field--radio {
-                  margin-right: 0.5rem;
-                }
-                .input-field--radio--hidden {
-                    width: 1px;
-                    margin: 0;
-                    visibility: hidden;
-                }
-            }
-            .active {
-                background-color: #F2F2F2;
-                border-color: #F2F2F2;
-                box-shadow: 0 1.5px 2px -2px grey;
-            }
-            .input-field--number {
-                width: calc(100% - 30px);
-            }
-           .input-field--specialCharacter {
-               padding: 10px 5px;
-               border: 1px solid #dce6eb;
-               width: 1.875rem;
-               text-align: center;
-               font-weight: bold;
-           }
-           .input-field--specialCharacter--pound {
-             border-radius: 2px 0 0 2px;
-             float: left;
-           }
-           .input-field--specialCharacter--percent {
-             border-radius: 0 2px 2px 0;
-           }
-        }
-        .form-group--gross {
-          .input-field--label {
-            text-align: center;
-          }
-        }
-        .form-group--mobile {
-          .input-field--label {
-            width: 100%;
-            margin-bottom: 10px;
-
-          }
-        }
-        .form-group--twos {
-            flex-wrap: wrap;
-            .radio-spacing {
-                margin: 0 0 10px 0;
-                width: 100%;
-            }
-        }
-        .form-group--loan-twos {
-          width: 100%;
-          flex-wrap: wrap;
-        }
-    }
-
-    // End of Input styles.
-
-    // Start of Output styles.
-
-    .tabs-component {
-      border: solid 1px #ddd;
-    }
-
-    .tabs-component-tab {
-        color: #999;
-        font-size: 14px;
-        font-weight: 600;
-        margin-right: 0;
-        list-style: none;
-        width: 33.3333%;
-        display: inline-block;
-        border: solid 1px #ddd;
-    }
-
-    .tabs-component-tab:hover {
-        color: #666;
-    }
-
-    .tabs-component-tab.is-active {
-        color: #000;
-        background-color: #f2f2f2;
-    }
-
-    .tabs-component-tab.is-disabled * {
-        color: #cdcdcd;
-        cursor: not-allowed !important;
-    }
-
-    .output {
-        .tabs-component {
-          .tabs-component-tabs {
-            padding: 0;
-          }
-        }
-        .output-description {
-            padding: 1em 0;
-            text-align: center;
-        }
-        .main-value {
-            padding: 3em 4em;
-            background-color: #f2f2f2;
-            .value-items {
-                text-align: center;
-            }
-            .value-title {
-                padding-bottom: 1em;
-            }
-            .value-number {
-                font-size: 2em;
-            }
-        }
-        .values-header {
-            padding-top: 2em;
-            text-align: center;
-            font-size: 1.2em;
-        }
-        .sub-values {
-            font-size: 1.2em;
-            padding: 1em 3em;
-            .value-items {
-                width: 50%;
-                display: inline-block;
-                padding-bottom: 0.5em;
-            }
-            .value-label {
-                font-weight: normal;
-            }
-        }
-        .value-number {
-            margin: 0;
-            text-align: right;
-            font-weight: bold;
-        }
-    }
-
-    .tabs-component-tab-a {
-        align-items: center;
-        color: inherit;
-        display: flex;
-        padding: 1em 0;
-        text-decoration: none;
-        text-align: center;
-        justify-content: center;
-
-    }
-
-    // End of Output styles.
-
-    @media (min-width: 991px) {
-
-        // Start of Global responsive styles.
-
-        button {
-          width: auto;
-        }
-
-        .flex-grow {
-          flex-grow: 0;
-        }
-
-        .radio-spacing {
-          margin: 0 10px 0 0;
-        }
-
-        // End of Global responsive styles.
-
-        // Start of Input responsive styles.
-
-        .input-fields {
-            .form-group {
-                display: flex;
-                .input-field {
-                    border: 1px solid #dce6eb;
-                    padding: 0.6875rem;
-                }
-                .border-left {
-                  border-left: none;
-                }
-                .input-field--label {
-                    &:hover {
-                        background-color: #F2F2F2;
-                    }
-                    &:active {
-                        background-color: #F2F2F2;
-                    }
-                }
-                .input-field--number {
-                    width: 35%;
-                }
-            }
-            .form-group--mobile {
-              .input-field--label {
-                width: auto;
-                margin-bottom: 0;
-              }
-            }
-            .form-group--twos {
-                width: 80%;
-                .radio-spacing {
-                    width: 47%;
-                    margin: 0 10px 10px 0;
-                }
-            }
-            .form-group--loan-twos {
-              width: 90%;
-            }
-        }
-
-        .input--width {
-            width: 50%;
-            display: inline-block;
-        }
-
-        // End of Input responsive styles.
-
-        // Start of Output responsive styles.
-
-        .output--width {
-           width: 50%;
-            display: inline-block;
-            float: right;
-        }
-
-        .tabs-component {
-          border: 0;
-        }
-
-        .tabs-component-tab {
-            background-color: #fff;
-            border: solid 1px #ddd;
-            transform: translateY(2px);
-            transition: transform .3s ease;
-            width: 34%;
-        }
-
-        .tabs-component-tabs {
-            align-items: stretch;
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: -1px;
-            padding: 0;
-        }
-
-        .tabs-component-tab.is-active {
-            border-bottom: solid 1px #f2f2f2;
-            z-index: 2;
-            transform: translateY(0);
-            border-top: 0.25em solid #1380bc;
-        }
-
-        .tabs-component-panels {
-            border-top-left-radius: 0;
-            background-color: #fff;
-            border: solid 1px #ddd;
-            border-radius: 0 6px 6px 6px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, .05);
-        }
-
-        // End of Output responsive styles.
-
-    }
-</style>

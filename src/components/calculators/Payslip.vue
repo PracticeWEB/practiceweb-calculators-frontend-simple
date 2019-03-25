@@ -94,11 +94,11 @@ Payslip calculator.
       <fieldset class="form-item">
         <p class="form-item__title">Tax year:</p>
         <div class="form-item__wrapper form-item__wrapper--year-selector  flex-wrap">
-          <label class="form-item__label flex-grow" :class="{active: input.date === '2018'}">
-            <input type="radio" v-model="input.date" value="2018" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2018 Tax Year Calculation
+          <label class="form-item__label flex-grow" :class="{active: input.date === '2019'}">
+            <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2018 Tax Year Calculation
           </label>
-          <label class="form-item__label flex-grow border-left" :class="{active: input.date === '2019'}">
-            <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019 Tax Year Calculation
+          <label class="form-item__label flex-grow border-left" :class="{active: input.date === '2018'}">
+            <input type="radio" v-model="input.date" value="2018" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019 Tax Year Calculation
           </label>
         </div>
       </fieldset>

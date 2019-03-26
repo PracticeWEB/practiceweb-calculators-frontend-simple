@@ -51,8 +51,19 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
                 <input name="propertyValue" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.propertyValue" class="form-item__input form-item__input--number" placeholder="Enter your property value here"/>
               </div>
             </fieldset>
+            <fieldset class="form-item">
+              <p class="form-item__title">Tax year:</p>
+              <div class="form-item__wrapper form-item__wrapper--year-selector flex-wrap">
+                <label class="form-item__label flex-grow" :class="{active: input.date === '2019'}">
+                  <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2018 Tax Year Calculation
+                </label>
+                <label class="form-item__label flex-grow border-left" :class="{active: input.date === '2018'}">
+                  <input type="radio" v-model="input.date" value="2018" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019 Tax Year Calculation
+                </label>
+              </div>
+            </fieldset>
             <button type="submit" class="pw-calc-button" :class="classes.button">Calculate</button>
-          </form>
+        </form>
           <br>
           <div class="pw-calc-output" v-if="Object.keys(output).length > 0">
             <div class="pw-calc-output__wrapper flex flex-wrap">
@@ -63,7 +74,7 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
             </div>
           </div>
         </div>
-    </div>
+      </div>
 </template>
 
 <script>
@@ -83,7 +94,8 @@ export default {
         region: 'england',
         type: 'residential',
         propertyValue: '300000',
-        firstTime: 'no'
+        firstTime: 'no',
+        date: '2019'
       },
       output: {}
     }

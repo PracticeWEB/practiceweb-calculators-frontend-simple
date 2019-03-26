@@ -11,7 +11,7 @@ Payslip calculator.
         <p class="form-item__title">Gross Pay *</p>
         <div class="form-item__wrapper form-item__wrapper--gross flex-wrap">
           <span class="form-item__character form-item__character--pound">&#163;</span>
-          <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.grossPay" class="form-item__input form-item__input--number border-left" placeholder="Enter your gross pay here"/>
+          <input name="grossPay" v-validate="'required|decimal:2'" type="number" min="1" step="0.01" v-model.number="input.grossPay" class="form-item__input form-item__input--number border-left" placeholder="Enter gross pay"/>
           <label class="form-item__label flex-grow border-left" :class="{active: input.period === 'annual'}">
             <input type="radio" v-model="input.period" value="annual" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>Annual
           </label>
@@ -37,7 +37,7 @@ Payslip calculator.
       <fieldset class="form-item">
         <p class="form-item__title">Percentage of salary paid into pension</p>
         <div class="form-item__wrapper">
-          <div class="flex flex-grow">
+          <div class="flex">
             <input type="number" min="0" v-model.number="input.pensionPercentage" class="form-item__input form-item__input--number">
             <span class="form-item__character form-item__character--percent inline border-left">&#37;</span>
           </div>
@@ -90,9 +90,18 @@ Payslip calculator.
             <p>You will be covered under {{ studentLoanPlan }}</p>
           </fieldset>
         </div>
-        <!--</fieldset>-->
       </fieldset>
-      <!--</fieldset>-->
+      <fieldset class="form-item">
+        <p class="form-item__title">Tax year:</p>
+        <div class="form-item__wrapper form-item__wrapper--year-selector  flex-wrap">
+          <label class="form-item__label flex-grow" :class="{active: input.date === '2019'}">
+            <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2018 Tax Year Calculation
+          </label>
+          <label class="form-item__label flex-grow border-left" :class="{active: input.date === '2018'}">
+            <input type="radio" v-model="input.date" value="2018" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019 Tax Year Calculation
+          </label>
+        </div>
+      </fieldset>
       <button type="submit" class="pw-calc-button" :class="classes.button" @click="setResult">Calculate</button>
     </form>
     <div class="pw-calc-output pw-calc-output__width pw-calc-output--tabs" v-if="Object.keys(output).length > 0">
@@ -190,12 +199,13 @@ Payslip calculator.
     data: () => {
       return {
         input: {
-          period: 'Annual',
+          period: 'annual',
           pensionPercentage: 0,
           pensionType: 'auto',
           studentLoanLocation: 'england',
           region: 'england',
-          studentLoan2012: 'before'
+          studentLoan2012: 'before',
+          date: '2019'
         },
         output: {},
         payslipResult: false,
@@ -209,7 +219,7 @@ Payslip calculator.
         this.resultPeriod = this.input.period
         this.resultGrossPay = this.input.grossPay
         this.payslipResult = true
-      }
+      },
     }
   }
 </script>

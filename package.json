@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "wordpress": "vue-cli-service build --mode wordpress"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
@@ -25,5 +26,9 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
+  },
+  "engines": {
+    "node": ">= 8.11.0"
   }
+
 }

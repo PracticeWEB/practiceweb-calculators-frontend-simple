@@ -1,7 +1,7 @@
 <!--
 Payslip calculator.
 -->
-<template xmlns="http://www.w3.org/1999/html">
+<template>
   <div class="practiceweb-calculator">
     <div class="pw-calc-header">
       <h3 class="pw-calc-header__title">Payslip Calculator</h3>

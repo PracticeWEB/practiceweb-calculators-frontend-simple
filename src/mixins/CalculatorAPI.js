@@ -32,6 +32,7 @@ export default {
               vm.$nextTick()
             })
             .catch((error) => {
+              console.log(event); 
               // TODO catch error
               // TODO parse repsonse
               // TODO update object

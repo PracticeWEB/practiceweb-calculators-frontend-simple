@@ -32,7 +32,8 @@ export default {
               vm.$nextTick()
             })
             .catch((error) => {
-              console.log(event); 
+              // eslint-disable-next-line no-console
+              console.log(event);
               // TODO catch error
               // TODO parse repsonse
               // TODO update object

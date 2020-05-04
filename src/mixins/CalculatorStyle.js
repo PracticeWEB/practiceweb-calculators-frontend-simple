@@ -16,7 +16,7 @@ export default {
           button: 'et_pb_button'
         }
       }
-      if (classMap.hasOwnProperty(this.calculatorStyle)) {
+      if (Object.prototype.hasOwnProperty.call(classMap, this.calculatorStyle)) {
         classes = classMap[this.calculatorStyle]
       } else {
         classes = classMap.default

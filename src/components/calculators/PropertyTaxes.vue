@@ -55,13 +55,13 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
               <p class="form-item__title">Tax year:</p>
               <div class="form-item__wrapper form-item__wrapper--year-selector flex-wrap">
                 <label class="form-item__label flex-grow" :class="{active: input.date === '2020'}">
-                  <input type="radio" v-model="input.date" value="2020" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2020 Tax Year Calculation
+                  <input type="radio" v-model="input.date" value="2020" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2020/21 Tax Year Calculation
                 </label>
                 <label class="form-item__label flex-grow" :class="{active: input.date === '2019'}">
-                  <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019 Tax Year Calculation
+                  <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019/20 Tax Year Calculation
                 </label>
                 <label class="form-item__label flex-grow border-left" :class="{active: input.date === '2018'}">
-                  <input type="radio" v-model="input.date" value="2018" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2018 Tax Year Calculation
+                  <input type="radio" v-model="input.date" value="2018" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2018/19 Tax Year Calculation
                 </label>
               </div>
             </fieldset>
@@ -74,6 +74,8 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
               <dd class="pw-calc-output__item pw-calc-output__item--value inline">{{ output.duty | currency }}</dd>
               <dt class="pw-calc-output__item pw-calc-output__item--label inline property-output" v-if="output.secondHomeDuty">Second Home Duty:</dt>
               <dd class="pw-calc-output__item pw-calc-output__item--value inline" v-if="output.secondHomeDuty">{{ output.secondHomeDuty | currency }}</dd>
+            </div>
+            <div>This calculator is solely for estimative purposes and no warranty is given as to the accuracy or completeness of any information. You should not make decisions based on results from this calculator. Talk to us for expert advice.
             </div>
           </div>
         </div>

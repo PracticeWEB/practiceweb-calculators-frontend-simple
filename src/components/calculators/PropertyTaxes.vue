@@ -75,7 +75,9 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
               <dt class="pw-calc-output__item pw-calc-output__item--label inline property-output" v-if="output.secondHomeDuty">Second Home Duty:</dt>
               <dd class="pw-calc-output__item pw-calc-output__item--value inline" v-if="output.secondHomeDuty">{{ output.secondHomeDuty | currency }}</dd>
             </div>
-            <div>This calculator is solely for estimative purposes and no warranty is given as to the accuracy or completeness of any information. You should not make decisions based on results from this calculator. Talk to us for expert advice.
+            <div class="pw-calc-disclaimer">
+              <p>From July 2020, a stamp duty land tax holiday reduces the rate to 0% for the purchase of all residential properties worth up £500,000 in England and Northern Ireland. In Wales and Scotland, the 0% rate applies on the purchase of all residential properties worth up to £250,000. These breaks apply until 31 March 2021, subject to future change.</p>
+              <p>This calculator is solely for estimative purposes and no warranty is given as to the accuracy or completeness of any information. You should not make decisions based on results from this calculator. Talk to us for expert advice.</p>
             </div>
           </div>
         </div>

@@ -34,7 +34,8 @@ Fuel Cost calculator.
             <dt class="pw-calc-output__item pw-calc-output__item--label inline">Fuel Cost:</dt>
             <dd class="pw-calc-output__item pw-calc-output__item--value inline">{{ output.fuelCost | currency }}</dd>
           </div>
-          <div>This calculator is solely for estimative purposes and no warranty is given as to the accuracy or completeness of any information. You should not make decisions based on results from this calculator. Talk to us for expert advice.
+          <div class="pw-calc-disclaimer">
+            <p>This calculator is solely for estimative purposes and no warranty is given as to the accuracy or completeness of any information. You should not make decisions based on results from this calculator. Talk to us for expert advice.</p>
           </div>
         </div>
       </div>

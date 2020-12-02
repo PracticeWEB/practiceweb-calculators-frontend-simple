@@ -163,7 +163,8 @@ Payslip calculator.
           </dl>
         </tab>
       </tabs>
-      <div>This calculator is solely for estimative purposes and no warranty is given as to the accuracy or completeness of any information. You should not make decisions based on results from this calculator. Talk to us for expert advice.
+      <div class="pw-calc-disclaimer">
+        <p>This calculator is solely for estimative purposes and no warranty is given as to the accuracy or completeness of any information. You should not make decisions based on results from this calculator. Talk to us for expert advice.</p>
       </div>
     </div>
   </div>

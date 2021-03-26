@@ -52,16 +52,22 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
               </div>
             </fieldset>
             <fieldset class="form-item">
-              <p class="form-item__title">Tax year:</p>
+              <p class="form-item__title">Transaction Date:</p>
               <div class="form-item__wrapper form-item__wrapper--year-selector flex-wrap">
+                <label class="form-item__label flex-grow" :class="{active: input.date === '2021-10'}">
+                  <input type="radio" v-model="input.date" value="2021-10" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>From 1st October 2021
+                </label>
+                <label class="form-item__label flex-grow" :class="{active: input.date === '2021-07'}">
+                  <input type="radio" v-model="input.date" value="2021-07" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>1st July 2021 to 31st September 2021
+                </label>
+                <label class="form-item__label flex-grow" :class="{active: input.date === '2021'}">
+                  <input type="radio" v-model="input.date" value="2021" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>1st January 2021 to 30th June 2021
+                </label>
                 <label class="form-item__label flex-grow" :class="{active: input.date === '2020'}">
-                  <input type="radio" v-model="input.date" value="2020" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2020/21 Tax Year Calculation
+                  <input type="radio" v-model="input.date" value="2020" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2020
                 </label>
                 <label class="form-item__label flex-grow" :class="{active: input.date === '2019'}">
-                  <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019/20 Tax Year Calculation
-                </label>
-                <label class="form-item__label flex-grow border-left" :class="{active: input.date === '2018'}">
-                  <input type="radio" v-model="input.date" value="2018" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2018/19 Tax Year Calculation
+                  <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019
                 </label>
               </div>
             </fieldset>

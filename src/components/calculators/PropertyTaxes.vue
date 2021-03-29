@@ -58,16 +58,13 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
                   <input type="radio" v-model="input.date" value="2021-10" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>From 1st October 2021
                 </label>
                 <label class="form-item__label flex-grow" :class="{active: input.date === '2021-07'}">
-                  <input type="radio" v-model="input.date" value="2021-07" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>1st July 2021 to 31st September 2021
+                  <input type="radio" v-model="input.date" value="2021-07" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>1st July 2021 to 30th September 2021
                 </label>
                 <label class="form-item__label flex-grow" :class="{active: input.date === '2021'}">
-                  <input type="radio" v-model="input.date" value="2021" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>1st January 2021 to 30th June 2021
+                  <input type="radio" v-model="input.date" value="2021" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>1st April 2021 to 30th June 2021
                 </label>
                 <label class="form-item__label flex-grow" :class="{active: input.date === '2020'}">
-                  <input type="radio" v-model="input.date" value="2020" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2020
-                </label>
-                <label class="form-item__label flex-grow" :class="{active: input.date === '2019'}">
-                  <input type="radio" v-model="input.date" value="2019" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>2019
+                  <input type="radio" v-model="input.date" value="2020" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>8th July 2021 to 31st March 2021
                 </label>
               </div>
             </fieldset>

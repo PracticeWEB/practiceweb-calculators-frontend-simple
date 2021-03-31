@@ -64,7 +64,7 @@ Property Taxes covers both Stamp Duty and Land  & Buildings Transaction Tax ( LB
                   <input type="radio" v-model="input.date" value="2021" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>1st April 2021 to 30th June 2021
                 </label>
                 <label class="form-item__label flex-grow" :class="{active: input.date === '2020'}">
-                  <input type="radio" v-model="input.date" value="2020" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>8th July 2021 to 31st March 2021
+                  <input type="radio" v-model="input.date" value="2020" class="form-item__input form-item__input--radio form-item__input--radio--hidden"/>8th July 2020 to 31st March 2021
                 </label>
               </div>
             </fieldset>

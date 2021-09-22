@@ -3,6 +3,11 @@ module.exports = {
   publicPath: process.env.PUBLIC_PATH || '/',
   filenameHashing: true,
   css: {
-    extract: false
+    extract: false,
+    loaderOptions: {
+      sass: {
+        implementation: require('sass'),
+      }
+    }
   }
 }

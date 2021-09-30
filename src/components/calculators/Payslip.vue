@@ -112,7 +112,7 @@ Payslip calculator.
         <p class="pw-calc-output__description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
       </template>
       <tabs>
-        <tab :key="'annual'" :name="tabNames.annual">
+        <tab onclick="centerOutput()" :key="'annual'" :name="tabNames.annual">
           <dl>
             <div class="pw-calc-output__main">
               <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt>
@@ -129,7 +129,7 @@ Payslip calculator.
             </div>
           </dl>
         </tab>
-        <tab :key="'month'" :name="tabNames.month">
+        <tab onclick="centerOutput()" :key="'month'" :name="tabNames.month">
           <dl>
             <div class="pw-calc-output__main">
               <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt>
@@ -146,7 +146,7 @@ Payslip calculator.
             </div>
           </dl>
         </tab>
-        <tab :key="'week'" :name="tabNames.week">
+        <tab onclick="centerOutput()" :key="'week'" :name="tabNames.week">
           <dl>
             <div class="pw-calc-output__main">
               <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.netPay | currency }} </dd>
@@ -227,6 +227,9 @@ Payslip calculator.
         this.payslipResult = true
       },
     }
+  }
+  function centerOutput() {
+    document.querySelector('.pw-calc-output').scrollIntoView(true);
   }
 </script>
 

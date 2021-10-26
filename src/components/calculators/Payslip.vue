@@ -111,8 +111,8 @@ Payslip calculator.
       <template v-if="payslipResult">
         <p class="pw-calc-output__description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
       </template>
-      <tabs>
-        <tab onclick="centerOutput()" :key="'annual'" :name="tabNames.annual">
+      <tabs @changed="tabChanged">
+        <tab :key="'annual'" :name="tabNames.annual">
           <dl>
             <div class="pw-calc-output__main">
               <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt>
@@ -129,7 +129,7 @@ Payslip calculator.
             </div>
           </dl>
         </tab>
-        <tab onclick="centerOutput()" :key="'month'" :name="tabNames.month">
+        <tab :key="'month'" :name="tabNames.month">
           <dl>
             <div class="pw-calc-output__main">
               <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt>
@@ -146,7 +146,7 @@ Payslip calculator.
             </div>
           </dl>
         </tab>
-        <tab onclick="centerOutput()" :key="'week'" :name="tabNames.week">
+        <tab :key="'week'" :name="tabNames.week">
           <dl>
             <div class="pw-calc-output__main">
               <dt class="pw-calc-output__item pw-calc-output__item-title">Net Pay:</dt><dd class="pw-calc-output__item pw-calc-output__item--value">{{ output.week.netPay | currency }} </dd>
@@ -173,6 +173,7 @@ Payslip calculator.
 <script>
   import CalculatorAPIMixin from '../../mixins/CalculatorAPI'
   import CalculatorStyle from '../../mixins/CalculatorStyle'
+
   export default {
     name: 'Payslip',
     mixins: [CalculatorAPIMixin, CalculatorStyle],
@@ -226,10 +227,10 @@ Payslip calculator.
         this.resultGrossPay = this.input.grossPay
         this.payslipResult = true
       },
+      tabChanged () {
+        document.querySelector('.pw-calc-output').scrollIntoView(true);
+      }
     }
-  }
-  function centerOutput() {
-    document.querySelector('.pw-calc-output').scrollIntoView(true);
   }
 </script>
 

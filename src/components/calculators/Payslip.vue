@@ -111,7 +111,7 @@ Payslip calculator.
       <template v-if="payslipResult">
         <p class="pw-calc-output__description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
       </template>
-      <tabs @changed="tabChanged">
+      <tabs @clicked="tabClicked">
         <tab :key="'annual'" :name="tabNames.annual">
           <dl>
             <div class="pw-calc-output__main">
@@ -227,8 +227,8 @@ Payslip calculator.
         this.resultGrossPay = this.input.grossPay
         this.payslipResult = true
       },
-      tabChanged () {
-        document.querySelector('.pw-calc-output').scrollIntoView(true);
+      tabClicked () {
+        document.querySelector('.pw-calc-output__description').scrollIntoView({behavior: 'smooth'});
       }
     }
   }

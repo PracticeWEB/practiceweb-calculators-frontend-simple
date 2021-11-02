@@ -111,7 +111,7 @@ Payslip calculator.
       <template v-if="payslipResult">
         <p class="pw-calc-output__description">Results based on <strong>{{ resultPeriod }}</strong> Gross pay of <span>{{ resultGrossPay | currency }}</span></p>
       </template>
-      <tabs>
+      <tabs @clicked="tabClicked">
         <tab :key="'annual'" :name="tabNames.annual">
           <dl>
             <div class="pw-calc-output__main">
@@ -173,6 +173,7 @@ Payslip calculator.
 <script>
   import CalculatorAPIMixin from '../../mixins/CalculatorAPI'
   import CalculatorStyle from '../../mixins/CalculatorStyle'
+
   export default {
     name: 'Payslip',
     mixins: [CalculatorAPIMixin, CalculatorStyle],
@@ -226,6 +227,15 @@ Payslip calculator.
         this.resultGrossPay = this.input.grossPay
         this.payslipResult = true
       },
+      /*
+      Added a tabClicked method. Which will look for a class at the top of the payslip output table.
+      It will then scroll the screen to that class. We have implemented this method to the payslip
+      calculator because currently as you user switches between output tabs it doesn't show the whole
+      table. This method means that once a tab is clicked it will scroll to the top of the output table.
+       */
+      tabClicked () {
+        document.querySelector('.pw-calc-output__description').scrollIntoView({behavior: 'smooth'});
+      }
     }
   }
 </script>
